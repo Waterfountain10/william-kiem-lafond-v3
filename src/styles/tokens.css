@@ -1,0 +1,34 @@
+:root {
+  /* Initial candidates only; final values follow the Figma mockup. */
+  --color-paper: #f4f1e8;
+  --color-ink: #34342f;
+  --color-ink-muted: #74746c;
+  --color-accent: #aab500;
+  --color-rule: color-mix(in srgb, var(--color-ink) 22%, transparent);
+
+  --font-display-georgia: Georgia, 'Times New Roman', serif;
+  --font-display-instrument: 'Instrument Serif', Georgia, serif;
+  --font-display-baskerville: 'Libre Baskerville', Baskerville, Georgia, serif;
+  --font-body-arial: Arial, Helvetica, sans-serif;
+  --font-body-be-vietnam: 'Be Vietnam Pro', Arial, sans-serif;
+  --font-body-dm-sans: 'DM Sans', Arial, sans-serif;
+
+  --font-display: var(--font-display-georgia);
+  --font-body: var(--font-body-arial);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  --content-wide: 76rem;
+  --content-reading: 42rem;
+  --rule-width: 1px;
+  --grain-opacity: 0.035;
+  --transition-fast: 160ms;
+}
