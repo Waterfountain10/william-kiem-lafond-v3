@@ -14,40 +14,49 @@ import '@fontsource/dm-sans/500.css';
     <header class="site-rail">
       <a class="name-link" href="#home" aria-label="Home">William Kiem-Lafond</a>
       <nav aria-label="Primary navigation">
-        <a class="is-active" href="#home"><span aria-hidden="true">·</span> Home</a>
+        <a class="is-active" href="#about"><span aria-hidden="true">·</span> About</a>
         <a href="#writing"><span aria-hidden="true">·</span> Writing</a>
         <a href="#projects"><span aria-hidden="true">·</span> Projects</a>
-        <a href="#about"><span aria-hidden="true">·</span> About</a>
+        <a href="#guestbook"><span aria-hidden="true">·</span> Guestbook</a>
       </nav>
       <p class="rail-note">A notebook on software,<br />systems, and making.</p>
     </header>
 
     <main id="home">
-      <section class="intro" aria-labelledby="page-title">
-        <p class="eyebrow">Personal technical notebook</p>
+      <section class="intro" id="about" aria-labelledby="page-title">
+        <p class="eyebrow">About</p>
         <h1 id="page-title">
-          <span data-dial-title>William Kiem-Lafond</span> is a
-          <em>software engineer</em> drawn to the systems beneath intelligent tools.
+          <span data-dial-title>William Kiem-Lafond</span> is a <em>software engineer</em>.
         </h1>
         <p class="lede" data-dial-intro>
-          Working around applied AI, compilers, infrastructure, and systems. This is a notebook for things I learn by building.
+          His work moves between machine learning and compiler engineering—from the behavior of models to the machinery beneath them.
         </p>
 
-        <div class="intro-meta">
-          <div>
-            <p class="meta-label">Previously</p>
-            <p>Machine learning at Shopify.<br />Compiler engineering at Qualcomm.</p>
+        <div class="experience" aria-labelledby="experience-title">
+          <p class="meta-label" id="experience-title">Experience</p>
+          <div class="experience-track">
+            <article>
+              <span class="level-label">Higher level</span>
+              <h3>Machine Learning</h3>
+              <p>Shopify</p>
+            </article>
+            <div class="level-rule" aria-hidden="true">
+              <span>models</span>
+              <i></i>
+              <span>machines</span>
+            </div>
+            <article>
+              <span class="level-label">Lower level</span>
+              <h3>Compiler Engineering</h3>
+              <p>Qualcomm</p>
+            </article>
           </div>
-          <blockquote>
-            <p>“We think systems, but we also have an eye for aesthetics.”</p>
-            <cite>— Vlad, good friend &amp; college roommate</cite>
-          </blockquote>
         </div>
 
-        <div class="intro-links" aria-label="Explore">
-          <a href="#writing">Read the notebook <span aria-hidden="true">↘</span></a>
-          <a href="#projects">Selected work <span aria-hidden="true">↘</span></a>
-        </div>
+        <blockquote>
+          <p>“We think systems, but we also have an eye for aesthetics.”</p>
+          <cite>— Vlad, good friend &amp; college roommate</cite>
+        </blockquote>
       </section>
 
       <div class="rule" aria-hidden="true"></div>
@@ -59,10 +68,11 @@ import '@fontsource/dm-sans/500.css';
         </div>
         <div class="section-content">
           <p class="section-note">Notes, experiments, and longer explanations.</p>
+          <div class="toc-heading" aria-hidden="true"><span>Title</span><span>Date</span></div>
           <div class="empty-row">
-            <span>Notes will appear here</span>
+            <span>No published notes yet</span>
             <span class="dot-leader" aria-hidden="true"></span>
-            <span>Index</span>
+            <span>—</span>
           </div>
         </div>
       </section>
@@ -74,23 +84,21 @@ import '@fontsource/dm-sans/500.css';
         </div>
         <div class="section-content">
           <p class="section-note">Selected engineering work, documented as it develops.</p>
-          <div class="empty-row">
-            <span>Selected work will appear here</span>
-            <span class="dot-leader" aria-hidden="true"></span>
-            <span>Index</span>
+          <div class="project-grid" aria-label="Projects pending">
+            <div><span>Selected work</span><small>Details pending</small></div>
+            <div><span>Experiments</span><small>Details pending</small></div>
           </div>
         </div>
       </section>
 
-      <section class="index-section" id="about" aria-labelledby="about-title">
+      <section class="index-section" id="guestbook" aria-labelledby="guestbook-title">
         <div class="section-heading">
           <p class="section-number">03</p>
-          <h2 id="about-title">Elsewhere</h2>
+          <h2 id="guestbook-title">Guestbook</h2>
         </div>
-        <div class="section-content elsewhere-links">
-          <span>GitHub</span>
-          <span>Email</span>
-          <span class="muted">Links pending</span>
+        <div class="section-content guestbook-note">
+          <p>Leave a note when the guestbook opens.</p>
+          <span class="muted">Not wired yet</span>
         </div>
       </section>
     </main>
@@ -176,7 +184,7 @@ import '@fontsource/dm-sans/500.css';
       Copy: {
         title: 'William Kiem-Lafond',
         introduction:
-          'Working around applied AI, compilers, infrastructure, and systems. This is a notebook for things I learn by building.',
+          'His work moves between machine learning and compiler engineering—from the behavior of models to the machinery beneath them.',
       },
     },
     { id: 'personal-site-landing-v2', persist: true },
@@ -400,34 +408,76 @@ import '@fontsource/dm-sans/500.css';
     line-height: var(--body-leading);
   }
 
-  .intro-meta {
-    display: grid;
-    grid-template-columns: minmax(180px, 0.8fr) minmax(260px, 1.2fr);
-    gap: clamp(2rem, 6vw, 5rem);
+  .experience {
     margin-top: var(--space-12);
     padding-top: var(--space-6);
     border-top: 1px var(--rule-style) var(--color-rule-custom);
     border-top-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-    font-size: 0.76rem;
   }
 
-  :global(html[data-horizontal-rules='false']) .intro-meta,
+  :global(html[data-horizontal-rules='false']) .experience,
   :global(html[data-horizontal-rules='false']) .rule,
-  :global(html[data-horizontal-rules='false']) .index-section {
+  :global(html[data-horizontal-rules='false']) .index-section::after {
     border-color: transparent;
   }
 
-  .intro-meta p {
-    margin: 0;
-    line-height: 1.45;
+  .meta-label {
+    margin-bottom: var(--space-4) !important;
   }
 
-  .meta-label {
-    margin-bottom: var(--space-2) !important;
+  .experience-track {
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) minmax(110px, 0.65fr) minmax(180px, 1fr);
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .experience-track article {
+    min-height: 7.5rem;
+    padding: var(--space-4);
+    border: 1px var(--rule-style) var(--color-rule-custom);
+    border-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
+  }
+
+  .experience-track h3,
+  .experience-track p {
+    margin: 0;
+  }
+
+  .experience-track h3 {
+    margin-top: var(--space-6);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+  }
+
+  .experience-track p,
+  .level-label {
+    color: var(--color-ink-muted);
+    font-size: 0.66rem;
+  }
+
+  .level-label {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .level-rule {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: 0.56rem;
+  }
+
+  .level-rule i {
+    border-top: 1px var(--rule-style) var(--color-accent);
   }
 
   blockquote {
-    margin: 0;
+    max-width: 38rem;
+    margin: var(--space-8) 0 0 auto;
     padding-left: var(--space-4);
     border-left: 1px var(--rule-style) var(--color-accent);
   }
@@ -446,39 +496,29 @@ import '@fontsource/dm-sans/500.css';
     font-style: normal;
   }
 
-  .intro-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-8);
-    margin-top: var(--space-8);
-    font-size: 0.78rem;
-  }
-
-  .intro-links a {
-    text-decoration: none;
-    text-decoration-color: var(--color-accent);
-  }
-
-  .intro-links a:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-  }
-
   .rule {
-    margin: var(--section-gap) calc(var(--page-inset) * -1) 0;
+    margin: var(--section-gap) calc(var(--page-inset) * -1) 0 calc((var(--nav-width) + var(--page-inset)) * -1);
     border-top: 1px var(--rule-style) var(--color-rule-custom);
     opacity: var(--rule-opacity);
   }
 
   .index-section {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(170px, 0.75fr) 2fr;
     gap: var(--space-8);
     margin-inline: calc(var(--page-inset) * -1);
     padding: var(--space-8) var(--page-inset);
+  }
+
+  .index-section::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: calc(var(--nav-width) * -1);
     border-bottom: 1px var(--rule-style) var(--color-rule-custom);
     border-bottom-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
+    content: '';
   }
 
   .section-heading {
@@ -509,6 +549,16 @@ import '@fontsource/dm-sans/500.css';
     font-size: 0.78rem;
   }
 
+  .toc-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .empty-row {
     display: flex;
     align-items: baseline;
@@ -528,10 +578,38 @@ import '@fontsource/dm-sans/500.css';
     opacity: var(--rule-opacity);
   }
 
-  .elsewhere-links {
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .project-grid > div {
     display: flex;
-    gap: var(--space-8);
+    min-height: 7rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-4);
+    border: 1px var(--rule-style) var(--color-rule-custom);
+    border-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
+    font-family: var(--font-display);
+  }
+
+  .project-grid small {
+    color: var(--color-ink-muted);
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+  }
+
+  .guestbook-note {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
     font-size: 0.8rem;
+  }
+
+  .guestbook-note p {
+    margin: 0;
   }
 
   .muted {
@@ -582,8 +660,16 @@ import '@fontsource/dm-sans/500.css';
       letter-spacing: min(var(--title-tracking), 1px);
     }
 
-    .intro-meta {
+    .experience-track {
       grid-template-columns: 1fr;
+    }
+
+    .level-rule {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    .rule {
+      margin-left: calc(var(--page-inset) * -1);
     }
 
     .index-section {
@@ -591,7 +677,15 @@ import '@fontsource/dm-sans/500.css';
       gap: var(--space-6);
     }
 
-    .elsewhere-links,
+    .index-section::after {
+      left: 0;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .guestbook-note,
     footer {
       flex-wrap: wrap;
     }
