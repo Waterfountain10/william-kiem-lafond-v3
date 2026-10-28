@@ -64,9 +64,10 @@ const { title } = Astro.props;
     Cursor: {
       enabled: true,
       size: [17, 10, 28, 1],
-      barWidth: [3, 1, 7, 0.5],
-      crossThickness: [1.5, 0.5, 4, 0.5],
-      morphDuration: [180, 60, 500, 10],
+      barWidth: [4, 1, 7, 0.5],
+      barHeight: [30, 17, 48, 1],
+      crossSize: [30, 17, 48, 1],
+      morphDuration: [220, 60, 500, 10],
       follow: [0.55, 0.15, 1, 0.05],
     },
     Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1], pageBlur: [12, 4, 24, 1], pageDuration: [680, 300, 1200, 20] },
@@ -91,7 +92,8 @@ const { title } = Astro.props;
     style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`); style.setProperty('--page-blur', `${values.Motion.pageBlur}px`);
     style.setProperty('--page-duration', `${values.Motion.pageDuration}ms`);
     style.setProperty('--cursor-size', `${values.Cursor.size}px`); style.setProperty('--cursor-bar-width', `${values.Cursor.barWidth}px`);
-    style.setProperty('--cursor-cross-thickness', `${values.Cursor.crossThickness}px`); style.setProperty('--cursor-morph-duration', `${values.Cursor.morphDuration}ms`);
+    style.setProperty('--cursor-bar-height', `${values.Cursor.barHeight}px`); style.setProperty('--cursor-cross-size', `${values.Cursor.crossSize}px`);
+    style.setProperty('--cursor-morph-duration', `${values.Cursor.morphDuration}ms`);
     cursorFollow = values.Cursor.follow;
     document.documentElement.dataset.horizontalRules = String(values.Details.horizontalRules);
     document.documentElement.dataset.edgeRules = String(values.Details.edgeRules);
