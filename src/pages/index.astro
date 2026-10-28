@@ -409,13 +409,22 @@ import '@fontsource/dm-sans/500.css';
   }
 
   .experience {
+    position: relative;
     margin-top: var(--space-12);
     padding-top: var(--space-6);
-    border-top: 1px var(--rule-style) var(--color-rule-custom);
-    border-top-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
   }
 
-  :global(html[data-horizontal-rules='false']) .experience,
+  .experience::before {
+    position: absolute;
+    top: 0;
+    left: calc((var(--nav-width) + var(--page-inset)) * -1);
+    width: calc(min(100vw, var(--canvas-width)) - 2px);
+    border-top: 1px var(--rule-style) var(--color-rule-custom);
+    border-top-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
+    content: '';
+  }
+
+  :global(html[data-horizontal-rules='false']) .experience::before,
   :global(html[data-horizontal-rules='false']) .rule,
   :global(html[data-horizontal-rules='false']) .index-section::after {
     border-color: transparent;
@@ -658,6 +667,11 @@ import '@fontsource/dm-sans/500.css';
     h1 {
       font-size: clamp(3rem, 13vw, var(--title-size));
       letter-spacing: min(var(--title-tracking), 1px);
+    }
+
+    .experience::before {
+      left: calc(var(--page-inset) * -1);
+      width: calc(100vw - 2px);
     }
 
     .experience-track {
