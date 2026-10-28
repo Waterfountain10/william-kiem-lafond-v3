@@ -1,0 +1,55 @@
+<div class="writing-elevator" data-writing-elevator>
+  <div class="writing-list" role="tablist" aria-label="writing selection">
+    <div class="elevator-rail" aria-hidden="true"><span class="elevator-car"></span></div>
+    <button class="writing-card is-selected" type="button" role="tab" aria-selected="true" aria-controls="writing-detail-1" data-writing-tab="0">
+      <span>writing 01</span><strong>title pending</strong><small>topic · date</small>
+    </button>
+    <button class="writing-card" type="button" role="tab" aria-selected="false" aria-controls="writing-detail-2" data-writing-tab="1">
+      <span>writing 02</span><strong>title pending</strong><small>topic · date</small>
+    </button>
+    <button class="writing-card" type="button" role="tab" aria-selected="false" aria-controls="writing-detail-3" data-writing-tab="2">
+      <span>writing 03</span><strong>title pending</strong><small>topic · date</small>
+    </button>
+  </div>
+  <div class="writing-stage" aria-live="polite">
+    <article class="writing-detail is-visible" id="writing-detail-1" role="tabpanel" data-writing-panel="0">
+      <div class="detail-art">ink drawing / thumbnail</div><p class="micro-label">selected writing · 01</p><h2>title pending</h2>
+      <p>an excerpt or short description can fade into this space once the first piece is ready.</p>
+    </article>
+    <article class="writing-detail" id="writing-detail-2" role="tabpanel" data-writing-panel="1" hidden>
+      <div class="detail-art">diagram / animation</div><p class="micro-label">selected writing · 02</p><h2>title pending</h2>
+      <p>this space can hold an explanatory sketch, a systems diagram, or a quiet text preview.</p>
+    </article>
+    <article class="writing-detail" id="writing-detail-3" role="tabpanel" data-writing-panel="2" hidden>
+      <div class="detail-art">pixel art / note</div><p class="micro-label">selected writing · 03</p><h2>title pending</h2>
+      <p>the final preview can combine a handwritten note with the article’s date and subject.</p>
+    </article>
+  </div>
+</div>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-writing-tab]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-writing-panel]'));
+  const car = document.querySelector<HTMLElement>('.elevator-car');
+  const selectWriting = (index: number) => {
+    const selected = tabs[index];
+    if (!selected || !car) return;
+    tabs.forEach((tab, tabIndex) => { const active = tabIndex === index; tab.classList.toggle('is-selected', active); tab.setAttribute('aria-selected', String(active)); });
+    car.style.transform = `translateY(${selected.offsetTop + 18}px)`;
+    panels.forEach((panel, panelIndex) => {
+      const active = panelIndex === index;
+      if (active) { panel.hidden = false; requestAnimationFrame(() => panel.classList.add('is-visible')); }
+      else { panel.classList.remove('is-visible'); window.setTimeout(() => { if (!panel.classList.contains('is-visible')) panel.hidden = true; }, 600); }
+    });
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectWriting(index));
+    tab.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      event.preventDefault();
+      const next = event.key === 'ArrowDown' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+      tabs[next]?.focus(); selectWriting(next);
+    });
+  });
+  requestAnimationFrame(() => selectWriting(0));
+</script>

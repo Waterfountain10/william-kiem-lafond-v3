@@ -1,0 +1,117 @@
+---
+import '../styles/site.css';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/libre-baskerville/400.css';
+import '@fontsource/be-vietnam-pro/400.css';
+import '@fontsource/be-vietnam-pro/500.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+
+interface Props {
+  title: string;
+  current?: 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
+}
+const { title, current = 'home' } = Astro.props;
+const links = [
+  { id: 'whoami', number: '00', label: 'whoami', href: '/whoami/' },
+  { id: 'writings', number: '01', label: 'writings', href: '/writings/' },
+  { id: 'projects', number: '02', label: 'projects', href: '/projects/' },
+  { id: 'guestbook', number: '03', label: 'guestbook', href: '/guestbook/' },
+] as const;
+---
+
+<!doctype html>
+<html lang="en" data-square-cursor="true" data-edge-rules="true" data-horizontal-rules="true">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="personal technical notebook by william kiem lafond" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="page-frame">
+      <header class="topbar">
+        <a class="home-name page-transition-link" href="/">william kiem lafond</a>
+        <nav class="topnav" aria-label="primary navigation">
+          {links.map((link) => (
+            <a class="page-transition-link" href={link.href} aria-current={current === link.id ? 'page' : undefined}>
+              <span>{link.number}</span> {link.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+      <div class="page-view" data-page-view>
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  import { createDialKit, createDialRoot } from 'dialkit/vanilla';
+  import 'dialkit/vanilla/styles.css';
+
+  const displayFonts: Record<string, string> = {
+    'Libre Baskerville': "'Libre Baskerville', Baskerville, Georgia, serif",
+    Georgia: "Georgia, 'Times New Roman', serif",
+    'Instrument Serif': "'Instrument Serif', Georgia, serif",
+  };
+  const bodyFonts: Record<string, string> = {
+    'DM Sans': "'DM Sans', Arial, sans-serif",
+    Arial: 'Arial, Helvetica, sans-serif',
+    'Be Vietnam Pro': "'Be Vietnam Pro', Arial, sans-serif",
+  };
+
+  createDialRoot({ position: 'bottom-right', theme: 'light', versions: 'thumbnails', productionEnabled: true });
+  const kit = createDialKit('Landing page', {
+    Type: {
+      display: { type: 'select', options: ['Libre Baskerville', 'Georgia', 'Instrument Serif'] },
+      body: { type: 'select', options: ['DM Sans', 'Arial', 'Be Vietnam Pro'] },
+      titleSize: [67, 44, 120, 1], titleTracking: [2, -6, 4, 0.1], bodySize: [16, 12, 20, 1], lineHeight: [1.5, 1.1, 2, 0.05],
+    },
+    Color: { paper: '#f4f1e8', ink: '#34342f', mutedInk: '#74746c', accent: '#aab500', rule: '#a7a79e' },
+    Layout: { canvasWidth: [1392, 800, 1680, 8], pageInset: [34, 16, 96, 2], topSpace: [32, 16, 120, 2] },
+    Details: {
+      grain: [0.2, 0, 0.3, 0.005], grainSize: [220, 48, 300, 4],
+      ruleStyle: { type: 'select', options: ['dashed', 'dotted', 'solid'] }, ruleOpacity: [0.45, 0.1, 1, 0.01],
+      horizontalRules: true, edgeRules: true, squareCursor: true, cursorSize: [17, 6, 22, 1],
+    },
+    Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1] },
+    Copy: { title: 'William Kiem Lafond', introduction: 'this is a notebook for things i learn by building.' },
+  }, { id: 'personal-site-v5', persist: true });
+
+  kit.subscribe((values) => {
+    const style = document.documentElement.style;
+    style.setProperty('--font-display', displayFonts[values.Type.display] ?? displayFonts['Libre Baskerville']);
+    style.setProperty('--font-body', bodyFonts[values.Type.body] ?? bodyFonts['DM Sans']);
+    style.setProperty('--color-paper', values.Color.paper); style.setProperty('--color-ink', values.Color.ink);
+    style.setProperty('--color-ink-muted', values.Color.mutedInk); style.setProperty('--color-accent', values.Color.accent);
+    style.setProperty('--color-rule-custom', values.Color.rule); style.setProperty('--title-size', `${values.Type.titleSize}px`);
+    style.setProperty('--title-tracking', `${values.Type.titleTracking}px`); style.setProperty('--body-size', `${values.Type.bodySize}px`);
+    style.setProperty('--body-leading', String(values.Type.lineHeight)); style.setProperty('--canvas-width', `${values.Layout.canvasWidth}px`);
+    style.setProperty('--page-inset', `${values.Layout.pageInset}px`); style.setProperty('--top-space', `${values.Layout.topSpace}px`);
+    style.setProperty('--grain-opacity', String(values.Details.grain)); style.setProperty('--grain-size', `${values.Details.grainSize}px`);
+    style.setProperty('--rule-style', values.Details.ruleStyle); style.setProperty('--rule-opacity', String(values.Details.ruleOpacity));
+    style.setProperty('--link-shift', `${values.Motion.linkShift}px`); style.setProperty('--elevator-duration', `${values.Motion.elevatorDuration}ms`);
+    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`);
+    const cursorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${values.Details.cursorSize}" height="${values.Details.cursorSize}"><rect width="100%" height="100%" fill="${values.Color.accent}"/></svg>`;
+    style.setProperty('--site-cursor', `url("data:image/svg+xml,${encodeURIComponent(cursorSvg)}")`);
+    document.documentElement.dataset.horizontalRules = String(values.Details.horizontalRules);
+    document.documentElement.dataset.edgeRules = String(values.Details.edgeRules);
+    document.documentElement.dataset.squareCursor = String(values.Details.squareCursor);
+    document.querySelectorAll<HTMLElement>('[data-site-title]').forEach((node) => { node.textContent = values.Copy.title.toLowerCase(); });
+    document.querySelectorAll<HTMLElement>('[data-site-intro]').forEach((node) => { node.textContent = values.Copy.introduction.toLowerCase(); });
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>('a.page-transition-link').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const destination = new URL(link.href);
+      if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
+      event.preventDefault();
+      document.querySelector('.page-frame')?.classList.add('is-leaving');
+      window.setTimeout(() => location.assign(destination.href), 220);
+    });
+  });
+</script>
