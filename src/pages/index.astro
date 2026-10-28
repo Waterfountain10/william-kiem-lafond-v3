@@ -1,30 +1,468 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/libre-baskerville/400.css';
+import '@fontsource/be-vietnam-pro/400.css';
+import '@fontsource/be-vietnam-pro/500.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
 ---
 
 <BaseLayout title="William Kiem-Lafond">
-  <main>
-    <h1>Design pending</h1>
-    <p>The landing page will be implemented from the approved Figma mockup.</p>
-  </main>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Home">William Kiem-Lafond</a>
+      <nav aria-label="Primary navigation">
+        <a class="is-active" href="#home">Home</a>
+        <a href="#writing">Writing</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Personal technical notebook</p>
+        <h1 id="page-title" data-dial-title>William Kiem-Lafond</h1>
+        <p class="lede" data-dial-intro>
+          Working around applied AI, compilers, infrastructure, and systems.
+          This is a notebook for things I learn by building.
+        </p>
+        <div class="intro-links" aria-label="Elsewhere">
+          <a href="#writing">Read the notebook <span aria-hidden="true">↘</span></a>
+          <a href="#projects">Selected work <span aria-hidden="true">↘</span></a>
+        </div>
+      </section>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <section class="index-section" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading">
+          <p class="section-number">01</p>
+          <h2 id="writing-title">Writing</h2>
+        </div>
+        <div class="section-content">
+          <p class="section-note">Notes, experiments, and longer explanations.</p>
+          <div class="empty-row">
+            <span>Notes will appear here</span>
+            <span class="dot-leader" aria-hidden="true"></span>
+            <span>Index</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="section-number">02</p>
+          <h2 id="projects-title">Projects</h2>
+        </div>
+        <div class="section-content">
+          <p class="section-note">Selected engineering work, documented as it develops.</p>
+          <div class="empty-row">
+            <span>Selected work will appear here</span>
+            <span class="dot-leader" aria-hidden="true"></span>
+            <span>Index</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-section" id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="section-number">03</p>
+          <h2 id="about-title">Elsewhere</h2>
+        </div>
+        <div class="section-content elsewhere-links">
+          <span>GitHub</span>
+          <span>Email</span>
+          <span class="muted">Links pending</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Personal notebook</span>
+      <span>Set in <span data-font-label>Georgia + Arial</span></span>
+    </footer>
+  </div>
 </BaseLayout>
 
+<script>
+  import { createDialKit, createDialRoot } from 'dialkit/vanilla';
+  import 'dialkit/vanilla/styles.css';
+
+  const displayFonts: Record<string, string> = {
+    Georgia: "Georgia, 'Times New Roman', serif",
+    'Instrument Serif': "'Instrument Serif', Georgia, serif",
+    'Libre Baskerville': "'Libre Baskerville', Baskerville, Georgia, serif",
+  };
+
+  const bodyFonts: Record<string, string> = {
+    Arial: 'Arial, Helvetica, sans-serif',
+    'Be Vietnam Pro': "'Be Vietnam Pro', Arial, sans-serif",
+    'DM Sans': "'DM Sans', Arial, sans-serif",
+  };
+
+  createDialRoot({
+    position: 'bottom-right',
+    theme: 'light',
+    versions: 'thumbnails',
+    productionEnabled: true,
+  });
+
+  const kit = createDialKit(
+    'Landing page',
+    {
+      Type: {
+        display: {
+          type: 'select',
+          options: ['Georgia', 'Instrument Serif', 'Libre Baskerville'],
+        },
+        body: {
+          type: 'select',
+          options: ['Arial', 'Be Vietnam Pro', 'DM Sans'],
+        },
+        titleSize: [76, 44, 112, 1],
+        titleTracking: [-2.8, -6, 2, 0.1],
+        bodySize: [15, 12, 20, 1],
+        lineHeight: [1.5, 1.1, 2, 0.05],
+      },
+      Color: {
+        paper: '#f4f1e8',
+        ink: '#34342f',
+        mutedInk: '#74746c',
+        accent: '#aab500',
+        rule: '#a7a79e',
+      },
+      Layout: {
+        canvasWidth: [1216, 800, 1600, 8],
+        pageInset: [40, 16, 96, 2],
+        topSpace: [36, 16, 120, 2],
+        introTop: [128, 48, 240, 4],
+        introWidth: [800, 440, 1000, 10],
+        sectionGap: [72, 32, 128, 4],
+      },
+      Details: {
+        grain: [0.035, 0, 0.12, 0.005],
+        ruleStyle: {
+          type: 'select',
+          options: ['dashed', 'dotted', 'solid'],
+        },
+        ruleOpacity: [0.62, 0.1, 1, 0.01],
+        showNumbers: true,
+      },
+      Copy: {
+        title: 'William Kiem-Lafond',
+        introduction:
+          'Working around applied AI, compilers, infrastructure, and systems. This is a notebook for things I learn by building.',
+      },
+    },
+    { id: 'personal-site-landing', persist: true },
+  );
+
+  kit.subscribe((values) => {
+    const style = document.documentElement.style;
+    const display = displayFonts[values.Type.display] ?? displayFonts.Georgia;
+    const body = bodyFonts[values.Type.body] ?? bodyFonts.Arial;
+
+    style.setProperty('--font-display', display);
+    style.setProperty('--font-body', body);
+    style.setProperty('--color-paper', values.Color.paper);
+    style.setProperty('--color-ink', values.Color.ink);
+    style.setProperty('--color-ink-muted', values.Color.mutedInk);
+    style.setProperty('--color-accent', values.Color.accent);
+    style.setProperty('--color-rule-custom', values.Color.rule);
+    style.setProperty('--title-size', `${values.Type.titleSize}px`);
+    style.setProperty('--title-tracking', `${values.Type.titleTracking}px`);
+    style.setProperty('--body-size', `${values.Type.bodySize}px`);
+    style.setProperty('--body-leading', String(values.Type.lineHeight));
+    style.setProperty('--canvas-width', `${values.Layout.canvasWidth}px`);
+    style.setProperty('--page-inset', `${values.Layout.pageInset}px`);
+    style.setProperty('--top-space', `${values.Layout.topSpace}px`);
+    style.setProperty('--intro-top', `${values.Layout.introTop}px`);
+    style.setProperty('--intro-width', `${values.Layout.introWidth}px`);
+    style.setProperty('--section-gap', `${values.Layout.sectionGap}px`);
+    style.setProperty('--grain-opacity', String(values.Details.grain));
+    style.setProperty('--rule-style', values.Details.ruleStyle);
+    style.setProperty('--rule-opacity', String(values.Details.ruleOpacity));
+    document.documentElement.dataset.showNumbers = String(values.Details.showNumbers);
+
+    const title = document.querySelector<HTMLElement>('[data-dial-title]');
+    const introduction = document.querySelector<HTMLElement>('[data-dial-intro]');
+    const fontLabel = document.querySelector<HTMLElement>('[data-font-label]');
+    if (title) title.textContent = values.Copy.title;
+    if (introduction) introduction.textContent = values.Copy.introduction;
+    if (fontLabel) fontLabel.textContent = `${values.Type.display} + ${values.Type.body}`;
+  });
+</script>
+
 <style>
-  main {
-    width: min(100% - 2rem, var(--content-reading));
+  :global(html) {
+    --title-size: 76px;
+    --title-tracking: -2.8px;
+    --body-size: 15px;
+    --body-leading: 1.5;
+    --canvas-width: 1216px;
+    --page-inset: 40px;
+    --top-space: 36px;
+    --intro-top: 128px;
+    --intro-width: 800px;
+    --section-gap: 72px;
+    --color-rule-custom: #a7a79e;
+    --rule-style: dashed;
+    --rule-opacity: 0.62;
+    scroll-behavior: smooth;
+    font-size: var(--body-size);
+  }
+
+  :global(body) {
+    min-width: 320px;
+    background: var(--color-paper);
+  }
+
+  :global(body::before) {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    pointer-events: none;
+    content: '';
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+  }
+
+  .site-shell {
+    width: min(100%, var(--canvas-width));
+    min-height: 100vh;
     margin-inline: auto;
-    padding-block: var(--space-24);
+    padding: var(--top-space) var(--page-inset) var(--space-8);
+  }
+
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(190px, 1fr) 2fr;
+    align-items: start;
+    font-size: 0.78rem;
+  }
+
+  .wordmark {
+    width: fit-content;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  nav a {
+    position: relative;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  nav a::after {
+    position: absolute;
+    right: 0;
+    bottom: -0.35rem;
+    left: 0;
+    height: 1px;
+    background: var(--color-accent);
+    content: '';
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  nav a:hover,
+  nav a.is-active {
+    color: var(--color-ink);
+  }
+
+  nav a:hover::after,
+  nav a.is-active::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  main {
+    padding-top: var(--intro-top);
+  }
+
+  .intro {
+    max-width: var(--intro-width);
+  }
+
+  .eyebrow,
+  .section-number {
+    margin: 0 0 var(--space-6);
+    color: var(--color-ink-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: var(--space-2);
+    border-radius: 50%;
+    background: var(--color-accent);
+    content: '';
   }
 
   h1 {
-    margin: 0 0 var(--space-4);
+    max-width: 12ch;
+    margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 8vw, 4rem);
+    font-size: clamp(3rem, 7vw, var(--title-size));
     font-weight: 400;
-    line-height: 1;
+    letter-spacing: var(--title-tracking);
+    line-height: 0.95;
+    text-wrap: balance;
   }
 
-  p {
+  .lede {
+    max-width: 52ch;
+    margin: var(--space-8) 0 0;
     color: var(--color-ink-muted);
+    font-size: 1rem;
+    line-height: var(--body-leading);
+  }
+
+  .intro-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+    font-size: 0.85rem;
+  }
+
+  .intro-links a {
+    text-decoration: none;
+  }
+
+  .intro-links a:hover {
+    color: var(--color-accent);
+  }
+
+  .rule {
+    margin: var(--section-gap) 0 0;
+    border-top: var(--rule-width) var(--rule-style) var(--color-rule-custom);
+    opacity: var(--rule-opacity);
+  }
+
+  .index-section {
+    display: grid;
+    grid-template-columns: minmax(190px, 1fr) 2fr;
+    gap: var(--space-8);
+    padding: var(--space-8) 0;
+    border-bottom: var(--rule-width) var(--rule-style) var(--color-rule-custom);
+    border-bottom-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 2rem auto;
+    align-items: baseline;
+  }
+
+  .section-number {
+    margin: 0;
+    font-size: 0.62rem;
+  }
+
+  :global(html[data-show-numbers='false']) .section-number {
+    visibility: hidden;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 400;
+  }
+
+  .section-note {
+    margin: 0 0 var(--space-8);
+    color: var(--color-ink-muted);
+    font-size: 0.82rem;
+  }
+
+  .empty-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-size: 0.86rem;
+  }
+
+  .empty-row > :last-child {
+    color: var(--color-ink-muted);
+    font-size: 0.72rem;
+  }
+
+  .dot-leader {
+    height: 1px;
+    flex: 1;
+    border-top: 1px dotted var(--color-rule-custom);
+    opacity: var(--rule-opacity);
+  }
+
+  .elsewhere-links {
+    display: flex;
+    gap: var(--space-8);
+    font-size: 0.86rem;
+  }
+
+  .muted {
+    color: var(--color-ink-muted);
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-8);
+    color: var(--color-ink-muted);
+    font-size: 0.68rem;
+  }
+
+  @media (max-width: 680px) {
+    .site-shell {
+      padding-inline: max(18px, var(--page-inset));
+    }
+
+    .site-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    nav {
+      width: 100%;
+      justify-content: flex-start;
+      overflow-x: auto;
+    }
+
+    main {
+      padding-top: max(4rem, calc(var(--intro-top) * 0.6));
+    }
+
+    h1 {
+      font-size: clamp(3rem, 15vw, var(--title-size));
+    }
+
+    .index-section {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .elsewhere-links,
+    footer {
+      flex-wrap: wrap;
+    }
   }
 </style>

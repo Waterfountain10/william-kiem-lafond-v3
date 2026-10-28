@@ -15,7 +15,12 @@
   "dependencies": {
     "@astrojs/mdx": "^8.1.1",
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.4.2"
+    "@fontsource/be-vietnam-pro": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/libre-baskerville": "^5.3.0",
+    "astro": "^7.4.2",
+    "dialkit": "^2.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
