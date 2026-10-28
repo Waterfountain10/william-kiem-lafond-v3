@@ -9,70 +9,98 @@ import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 ---
 
-<BaseLayout title="William Kiem-Lafond">
+<BaseLayout title="william kiem lafond">
   <div class="site-shell">
     <header class="site-rail">
-      <a class="name-link" href="#home" aria-label="Home">William Kiem-Lafond</a>
-      <nav aria-label="Primary navigation">
-        <a class="is-active" href="#about"><span aria-hidden="true">·</span> About</a>
-        <a href="#writing"><span aria-hidden="true">·</span> Writing</a>
-        <a href="#projects"><span aria-hidden="true">·</span> Projects</a>
-        <a href="#guestbook"><span aria-hidden="true">·</span> Guestbook</a>
+      <a class="name-link animated-link" href="#whoami" aria-label="home">william kiem lafond</a>
+      <nav aria-label="primary navigation">
+        <a class="is-active" href="#whoami"><span aria-hidden="true">·</span> whoami</a>
+        <a href="#writings"><span aria-hidden="true">·</span> writings</a>
+        <a href="#projects"><span aria-hidden="true">·</span> projects</a>
+        <a href="#guestbook"><span aria-hidden="true">·</span> guestbook</a>
       </nav>
-      <p class="rail-note">A notebook on software,<br />systems, and making.</p>
+      <p class="rail-note">a notebook on software,<br />systems, and making.</p>
     </header>
 
-    <main id="home">
-      <section class="intro" id="about" aria-labelledby="page-title">
-        <p class="eyebrow">About</p>
-        <h1 id="page-title">
-          <span data-dial-title>William Kiem-Lafond</span> is a <em>software engineer</em>.
-        </h1>
-        <p class="lede" data-dial-intro>
-          His work moves between machine learning and compiler engineering—from the behavior of models to the machinery beneath them.
-        </p>
+    <main>
+      <section class="whoami" id="whoami" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">whoami</p>
+          <h1 id="page-title">
+            <span data-dial-title>william kiem lafond</span> is a <em>systems engineer</em>.
+          </h1>
+          <p class="lede" data-dial-intro>this is a notebook for things i learn by building.</p>
+        </div>
 
-        <div class="experience" aria-labelledby="experience-title">
-          <p class="meta-label" id="experience-title">Experience</p>
-          <div class="experience-track">
-            <article>
-              <span class="level-label">Higher level</span>
-              <h3>Machine Learning</h3>
-              <p>Shopify</p>
-            </article>
-            <div class="level-rule" aria-hidden="true">
-              <span>models</span>
-              <i></i>
-              <span>machines</span>
-            </div>
-            <article>
-              <span class="level-label">Lower level</span>
-              <h3>Compiler Engineering</h3>
-              <p>Qualcomm</p>
-            </article>
-          </div>
+        <div class="art-placeholder" aria-label="placeholder for a hand-drawn asset">
+          <span>your ink drawing</span>
+          <div class="wire-cube" aria-hidden="true"><i></i></div>
+        </div>
+
+        <div class="experience-copy" aria-label="experience">
+          <p>
+            worked on machine learning algorithms at <a class="company-link" href="https://www.shopify.com/" target="_blank" rel="noreferrer">shopify<span aria-hidden="true">↗</span></a>.
+          </p>
+          <p>
+            fine-tuned cpu compilers at <a class="company-link" href="https://www.qualcomm.com/" target="_blank" rel="noreferrer">qualcomm<span aria-hidden="true">↗</span></a>.
+          </p>
+          <p>
+            researched applied rag at <a class="company-link" href="https://mila.quebec/en" target="_blank" rel="noreferrer">mila<span aria-hidden="true">↗</span></a>.
+          </p>
         </div>
 
         <blockquote>
-          <p>“We think systems, but we also have an eye for aesthetics.”</p>
-          <cite>— Vlad, good friend &amp; college roommate</cite>
+          <p>“we think systems, but we also have an eye for aesthetics.”</p>
+          <cite>— vlad, good friend &amp; college roommate</cite>
         </blockquote>
       </section>
 
-      <div class="rule" aria-hidden="true"></div>
+      <div class="full-rule" aria-hidden="true"></div>
 
-      <section class="index-section" id="writing" aria-labelledby="writing-title">
+      <section class="index-section writings-section" id="writings" aria-labelledby="writings-title">
         <div class="section-heading">
           <p class="section-number">01</p>
-          <h2 id="writing-title">Writing</h2>
+          <h2 id="writings-title">writings</h2>
         </div>
-        <div class="section-content">
-          <p class="section-note">Notes, experiments, and longer explanations.</p>
-          <div class="toc-heading" aria-hidden="true"><span>Title</span><span>Date</span></div>
-          <div class="empty-row">
-            <span>No published notes yet</span>
-            <span class="dot-leader" aria-hidden="true"></span>
-            <span>—</span>
+        <div class="section-content writing-elevator" data-writing-elevator>
+          <div class="writing-list" role="tablist" aria-label="writing selection">
+            <div class="elevator-rail" aria-hidden="true"><span class="elevator-car"></span></div>
+            <button class="writing-card is-selected" type="button" role="tab" aria-selected="true" aria-controls="writing-detail-1" data-writing-tab="0">
+              <span class="writing-index">writing 01</span>
+              <strong>title pending</strong>
+              <small>topic · date</small>
+            </button>
+            <button class="writing-card" type="button" role="tab" aria-selected="false" aria-controls="writing-detail-2" data-writing-tab="1">
+              <span class="writing-index">writing 02</span>
+              <strong>title pending</strong>
+              <small>topic · date</small>
+            </button>
+            <button class="writing-card" type="button" role="tab" aria-selected="false" aria-controls="writing-detail-3" data-writing-tab="2">
+              <span class="writing-index">writing 03</span>
+              <strong>title pending</strong>
+              <small>topic · date</small>
+            </button>
+          </div>
+
+          <div class="writing-stage" aria-live="polite">
+            <article class="writing-detail is-visible" id="writing-detail-1" role="tabpanel" data-writing-panel="0">
+              <div class="detail-art">ink drawing / thumbnail</div>
+              <p class="micro-label">selected writing · 01</p>
+              <h3>title pending</h3>
+              <p>an excerpt or short description can fade into this space once the first piece is ready.</p>
+            </article>
+            <article class="writing-detail" id="writing-detail-2" role="tabpanel" data-writing-panel="1" hidden>
+              <div class="detail-art">diagram / animation</div>
+              <p class="micro-label">selected writing · 02</p>
+              <h3>title pending</h3>
+              <p>this space can hold an explanatory sketch, a systems diagram, or a quiet text preview.</p>
+            </article>
+            <article class="writing-detail" id="writing-detail-3" role="tabpanel" data-writing-panel="2" hidden>
+              <div class="detail-art">pixel art / note</div>
+              <p class="micro-label">selected writing · 03</p>
+              <h3>title pending</h3>
+              <p>the final preview can combine a handwritten note with the article’s date and subject.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -80,13 +108,13 @@ import '@fontsource/dm-sans/500.css';
       <section class="index-section" id="projects" aria-labelledby="projects-title">
         <div class="section-heading">
           <p class="section-number">02</p>
-          <h2 id="projects-title">Projects</h2>
+          <h2 id="projects-title">projects</h2>
         </div>
         <div class="section-content">
-          <p class="section-note">Selected engineering work, documented as it develops.</p>
-          <div class="project-grid" aria-label="Projects pending">
-            <div><span>Selected work</span><small>Details pending</small></div>
-            <div><span>Experiments</span><small>Details pending</small></div>
+          <p class="section-note">selected engineering work, documented as it develops.</p>
+          <div class="project-grid" aria-label="projects pending">
+            <div><span>selected work</span><small>details pending</small></div>
+            <div class="project-art"><span>your drawing here</span><small>ink / pixel / diagram</small></div>
           </div>
         </div>
       </section>
@@ -94,18 +122,18 @@ import '@fontsource/dm-sans/500.css';
       <section class="index-section" id="guestbook" aria-labelledby="guestbook-title">
         <div class="section-heading">
           <p class="section-number">03</p>
-          <h2 id="guestbook-title">Guestbook</h2>
+          <h2 id="guestbook-title">guestbook</h2>
         </div>
         <div class="section-content guestbook-note">
-          <p>Leave a note when the guestbook opens.</p>
-          <span class="muted">Not wired yet</span>
+          <p>leave a note when the guestbook opens.</p>
+          <span class="muted">not wired yet</span>
         </div>
       </section>
     </main>
 
     <footer>
-      <span>Personal notebook</span>
-      <span>Set in <span data-font-label>Georgia + Arial</span></span>
+      <span>personal notebook</span>
+      <span>set in <span data-font-label>libre baskerville + dm sans</span></span>
     </footer>
   </div>
 </BaseLayout>
@@ -119,84 +147,62 @@ import '@fontsource/dm-sans/500.css';
     'Instrument Serif': "'Instrument Serif', Georgia, serif",
     'Libre Baskerville': "'Libre Baskerville', Baskerville, Georgia, serif",
   };
-
   const bodyFonts: Record<string, string> = {
     Arial: 'Arial, Helvetica, sans-serif',
     'Be Vietnam Pro': "'Be Vietnam Pro', Arial, sans-serif",
     'DM Sans': "'DM Sans', Arial, sans-serif",
   };
 
-  createDialRoot({
-    position: 'bottom-right',
-    theme: 'light',
-    versions: 'thumbnails',
-    productionEnabled: true,
-  });
+  createDialRoot({ position: 'bottom-right', theme: 'light', versions: 'thumbnails', productionEnabled: true });
 
   const kit = createDialKit(
     'Landing page',
     {
       Type: {
-        display: {
-          type: 'select',
-          options: ['Georgia', 'Instrument Serif', 'Libre Baskerville'],
-        },
-        body: {
-          type: 'select',
-          options: ['Arial', 'Be Vietnam Pro', 'DM Sans'],
-        },
-        titleSize: [100, 44, 120, 1],
+        display: { type: 'select', options: ['Libre Baskerville', 'Georgia', 'Instrument Serif'] },
+        body: { type: 'select', options: ['DM Sans', 'Arial', 'Be Vietnam Pro'] },
+        titleSize: [67, 44, 120, 1],
         titleTracking: [2, -6, 4, 0.1],
         bodySize: [16, 12, 20, 1],
         lineHeight: [1.5, 1.1, 2, 0.05],
       },
       Color: {
-        paper: '#f4f1e8',
-        ink: '#34342f',
-        mutedInk: '#74746c',
-        accent: '#aab500',
-        rule: '#a7a79e',
+        paper: '#f4f1e8', ink: '#34342f', mutedInk: '#74746c', accent: '#aab500', rule: '#a7a79e',
       },
       Layout: {
-        canvasWidth: [1296, 800, 1600, 8],
+        canvasWidth: [1392, 800, 1680, 8],
         pageInset: [34, 16, 96, 2],
-        topSpace: [30, 16, 120, 2],
+        topSpace: [32, 16, 120, 2],
         introTop: [128, 48, 240, 4],
         introWidth: [800, 440, 1040, 10],
         sectionGap: [60, 32, 128, 4],
         navWidth: [196, 140, 300, 2],
       },
       Details: {
-        grain: [0.12, 0, 0.16, 0.005],
-        grainSize: [96, 48, 220, 4],
-        ruleStyle: {
-          type: 'select',
-          options: ['dashed', 'dotted', 'solid'],
-        },
+        grain: [0.16, 0, 0.2, 0.005],
+        grainSize: [220, 48, 260, 4],
+        ruleStyle: { type: 'select', options: ['dashed', 'dotted', 'solid'] },
         ruleOpacity: [0.45, 0.1, 1, 0.01],
-        verticalRules: true,
-        horizontalRules: true,
-        edgeRules: true,
-        showNumbers: true,
-        squareCursor: true,
-        cursorSize: [10, 6, 18, 1],
+        verticalRules: true, horizontalRules: true, edgeRules: true, showNumbers: true,
+        squareCursor: true, cursorSize: [17, 6, 22, 1],
+      },
+      Motion: {
+        linkShift: [4, 0, 12, 1],
+        elevatorDuration: [560, 120, 1200, 20],
+        detailBlur: [6, 0, 18, 1],
       },
       Copy: {
-        title: 'William Kiem-Lafond',
-        introduction:
-          'His work moves between machine learning and compiler engineering—from the behavior of models to the machinery beneath them.',
+        title: 'William Kiem Lafond',
+        introduction: 'this is a notebook for things i learn by building.',
       },
     },
-    { id: 'personal-site-landing-v2', persist: true },
+    { id: 'personal-site-landing-v4', persist: true },
   );
 
   kit.subscribe((values) => {
     const style = document.documentElement.style;
-    const display = displayFonts[values.Type.display] ?? displayFonts.Georgia;
-    const body = bodyFonts[values.Type.body] ?? bodyFonts.Arial;
-
-    style.setProperty('--font-display', display);
-    style.setProperty('--font-body', body);
+    style.setProperty('--font-display', displayFonts[values.Type.display] ?? displayFonts['Libre Baskerville']);
+    style.setProperty('--font-body', bodyFonts[values.Type.body] ?? bodyFonts['DM Sans']);
     style.setProperty('--color-paper', values.Color.paper);
     style.setProperty('--color-ink', values.Color.ink);
     style.setProperty('--color-ink-muted', values.Color.mutedInk);
@@ -217,10 +223,12 @@ import '@fontsource/dm-sans/500.css';
     style.setProperty('--grain-size', `${values.Details.grainSize}px`);
     style.setProperty('--rule-style', values.Details.ruleStyle);
     style.setProperty('--rule-opacity', String(values.Details.ruleOpacity));
+    style.setProperty('--link-shift', `${values.Motion.linkShift}px`);
+    style.setProperty('--elevator-duration', `${values.Motion.elevatorDuration}ms`);
+    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`);
 
     const cursorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${values.Details.cursorSize}" height="${values.Details.cursorSize}"><rect width="100%" height="100%" fill="${values.Color.accent}"/></svg>`;
     style.setProperty('--site-cursor', `url("data:image/svg+xml,${encodeURIComponent(cursorSvg)}")`);
-
     document.documentElement.dataset.showNumbers = String(values.Details.showNumbers);
     document.documentElement.dataset.verticalRules = String(values.Details.verticalRules);
     document.documentElement.dataset.horizontalRules = String(values.Details.horizontalRules);
@@ -230,490 +238,139 @@ import '@fontsource/dm-sans/500.css';
     const title = document.querySelector<HTMLElement>('[data-dial-title]');
     const introduction = document.querySelector<HTMLElement>('[data-dial-intro]');
     const fontLabel = document.querySelector<HTMLElement>('[data-font-label]');
-    if (title) title.textContent = values.Copy.title;
-    if (introduction) introduction.textContent = values.Copy.introduction;
-    if (fontLabel) fontLabel.textContent = `${values.Type.display} + ${values.Type.body}`;
+    if (title) title.textContent = values.Copy.title.toLowerCase();
+    if (introduction) introduction.textContent = values.Copy.introduction.toLowerCase();
+    if (fontLabel) fontLabel.textContent = `${values.Type.display} + ${values.Type.body}`.toLowerCase();
   });
+
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-writing-tab]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-writing-panel]'));
+  const car = document.querySelector<HTMLElement>('.elevator-car');
+
+  const selectWriting = (index: number) => {
+    const selected = tabs[index];
+    if (!selected || !car) return;
+    tabs.forEach((tab, tabIndex) => {
+      const active = tabIndex === index;
+      tab.classList.toggle('is-selected', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    car.style.transform = `translateY(${selected.offsetTop + 18}px)`;
+    panels.forEach((panel, panelIndex) => {
+      const active = panelIndex === index;
+      if (active) {
+        panel.hidden = false;
+        requestAnimationFrame(() => panel.classList.add('is-visible'));
+      } else {
+        panel.classList.remove('is-visible');
+        window.setTimeout(() => { if (!panel.classList.contains('is-visible')) panel.hidden = true; }, 600);
+      }
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectWriting(index));
+    tab.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      event.preventDefault();
+      const next = event.key === 'ArrowDown' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+      tabs[next]?.focus();
+      selectWriting(next);
+    });
+  });
+  requestAnimationFrame(() => selectWriting(0));
+
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]'));
+  const observedSections = navLinks
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => Boolean(section));
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach((link) => link.classList.toggle('is-active', link.hash === `#${visible.target.id}`));
+    },
+    { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.25, 0.6] },
+  );
+  observedSections.forEach((section) => sectionObserver.observe(section));
 </script>
 
 <style>
   :global(html) {
-    --title-size: 100px;
-    --title-tracking: 2px;
-    --body-size: 16px;
-    --body-leading: 1.5;
-    --canvas-width: 1296px;
-    --page-inset: 34px;
-    --top-space: 30px;
-    --intro-top: 128px;
-    --intro-width: 800px;
-    --section-gap: 60px;
-    --nav-width: 196px;
-    --grain-size: 96px;
-    --color-rule-custom: #a7a79e;
-    --rule-style: dashed;
-    --rule-opacity: 0.45;
-    --site-cursor: auto;
-    scroll-behavior: smooth;
-    font-size: var(--body-size);
+    --title-size: 67px; --title-tracking: 2px; --body-size: 16px; --body-leading: 1.5;
+    --canvas-width: 1392px; --page-inset: 34px; --top-space: 32px; --intro-top: 128px;
+    --intro-width: 800px; --section-gap: 60px; --nav-width: 196px; --grain-size: 220px;
+    --color-rule-custom: #a7a79e; --rule-style: dashed; --rule-opacity: .45;
+    --site-cursor: auto; --link-shift: 4px; --elevator-duration: 560ms; --detail-blur: 6px;
+    scroll-behavior: smooth; font-size: var(--body-size); text-transform: lowercase;
   }
-
-  :global(html[data-square-cursor='true']),
-  :global(html[data-square-cursor='true'] *) {
-    cursor: var(--site-cursor) 5 5, auto;
-  }
-
-  :global(::selection) {
-    background: var(--color-accent);
-    color: var(--color-ink);
-  }
-
-  :global(body) {
-    min-width: 320px;
-    background: var(--color-paper);
-  }
-
-  :global(body::before) {
-    position: fixed;
-    z-index: 10;
-    inset: 0;
-    pointer-events: none;
-    content: '';
-    opacity: var(--grain-opacity);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
-    background-size: var(--grain-size) var(--grain-size);
-  }
-
-  .site-shell {
-    display: grid;
-    grid-template-columns: var(--nav-width) minmax(0, 1fr);
-    width: min(100%, var(--canvas-width));
-    min-height: 100vh;
-    margin-inline: auto;
-    border-inline: 1px var(--rule-style) var(--color-rule-custom);
-    border-inline-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-  }
-
-  :global(html[data-edge-rules='false']) .site-shell {
-    border-inline-color: transparent;
-  }
-
-  .site-rail {
-    position: sticky;
-    top: 0;
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--top-space) var(--page-inset);
-    border-right: 1px var(--rule-style) var(--color-rule-custom);
-    border-right-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-    font-size: 0.72rem;
-  }
-
-  :global(html[data-vertical-rules='false']) .site-rail {
-    border-right-color: transparent;
-  }
-
-  .name-link {
-    color: var(--color-ink-muted);
-    line-height: 1.2;
-    text-decoration: none;
-  }
-
-  nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    margin-top: var(--intro-top);
-  }
-
-  nav a {
-    color: var(--color-ink-muted);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-
-  nav a span {
-    color: transparent;
-  }
-
-  nav a:hover,
-  nav a.is-active {
-    color: var(--color-accent);
-  }
-
-  nav a:hover span,
-  nav a.is-active span {
-    color: currentColor;
-  }
-
-  .rail-note {
-    margin: auto 0 0;
-    color: var(--color-ink-muted);
-    font-family: var(--font-display);
-    font-size: 0.74rem;
-    font-style: italic;
-    line-height: 1.35;
-  }
-
-  main {
-    min-width: 0;
-    padding: calc(var(--top-space) + var(--intro-top)) var(--page-inset) 0;
-  }
-
-  .intro {
-    max-width: var(--intro-width);
-  }
-
-  .eyebrow,
-  .section-number,
-  .meta-label {
-    margin: 0 0 var(--space-6);
-    color: var(--color-ink-muted);
-    font-size: 0.64rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .eyebrow::before {
-    display: inline-block;
-    width: 0.42rem;
-    height: 0.42rem;
-    margin-right: var(--space-2);
-    background: var(--color-accent);
-    content: '';
-  }
-
-  h1 {
-    max-width: 16ch;
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6.7vw, var(--title-size));
-    font-weight: 400;
-    letter-spacing: var(--title-tracking);
-    line-height: 0.98;
-    text-wrap: balance;
-  }
-
-  h1 em {
-    color: var(--color-accent);
-    font-weight: inherit;
-  }
-
-  .lede {
-    max-width: 54ch;
-    margin: var(--space-8) 0 0;
-    color: var(--color-ink-muted);
-    line-height: var(--body-leading);
-  }
-
-  .experience {
-    position: relative;
-    margin-top: var(--space-12);
-    padding-top: var(--space-6);
-  }
-
-  .experience::before {
-    position: absolute;
-    top: 0;
-    left: calc((var(--nav-width) + var(--page-inset)) * -1);
-    width: calc(min(100vw, var(--canvas-width)) - 2px);
-    border-top: 1px var(--rule-style) var(--color-rule-custom);
-    border-top-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-    content: '';
-  }
-
-  :global(html[data-horizontal-rules='false']) .experience::before,
-  :global(html[data-horizontal-rules='false']) .rule,
-  :global(html[data-horizontal-rules='false']) .index-section::after {
-    border-color: transparent;
-  }
-
-  .meta-label {
-    margin-bottom: var(--space-4) !important;
-  }
-
-  .experience-track {
-    display: grid;
-    grid-template-columns: minmax(150px, 1fr) minmax(110px, 0.65fr) minmax(180px, 1fr);
-    align-items: center;
-    gap: var(--space-4);
-  }
-
-  .experience-track article {
-    min-height: 7.5rem;
-    padding: var(--space-4);
-    border: 1px var(--rule-style) var(--color-rule-custom);
-    border-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-  }
-
-  .experience-track h3,
-  .experience-track p {
-    margin: 0;
-  }
-
-  .experience-track h3 {
-    margin-top: var(--space-6);
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 400;
-  }
-
-  .experience-track p,
-  .level-label {
-    color: var(--color-ink-muted);
-    font-size: 0.66rem;
-  }
-
-  .level-label {
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .level-rule {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--color-ink-muted);
-    font-size: 0.56rem;
-  }
-
-  .level-rule i {
-    border-top: 1px var(--rule-style) var(--color-accent);
-  }
-
-  blockquote {
-    max-width: 38rem;
-    margin: var(--space-8) 0 0 auto;
-    padding-left: var(--space-4);
-    border-left: 1px var(--rule-style) var(--color-accent);
-  }
-
-  blockquote p {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-style: italic;
-  }
-
-  blockquote cite {
-    display: block;
-    margin-top: var(--space-3);
-    color: var(--color-ink-muted);
-    font-size: 0.66rem;
-    font-style: normal;
-  }
-
-  .rule {
-    margin: var(--section-gap) calc(var(--page-inset) * -1) 0 calc((var(--nav-width) + var(--page-inset)) * -1);
-    border-top: 1px var(--rule-style) var(--color-rule-custom);
-    opacity: var(--rule-opacity);
-  }
-
-  .index-section {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(170px, 0.75fr) 2fr;
-    gap: var(--space-8);
-    margin-inline: calc(var(--page-inset) * -1);
-    padding: var(--space-8) var(--page-inset);
-  }
-
-  .index-section::after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: calc(var(--nav-width) * -1);
-    border-bottom: 1px var(--rule-style) var(--color-rule-custom);
-    border-bottom-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-    content: '';
-  }
-
-  .section-heading {
-    display: grid;
-    grid-template-columns: 2rem auto;
-    align-items: baseline;
-  }
-
-  .section-number {
-    margin: 0;
-    font-size: 0.58rem;
-  }
-
-  :global(html[data-show-numbers='false']) .section-number {
-    visibility: hidden;
-  }
-
-  h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 1.45rem;
-    font-weight: 400;
-  }
-
-  .section-note {
-    margin: 0 0 var(--space-8);
-    color: var(--color-ink-muted);
-    font-size: 0.78rem;
-  }
-
-  .toc-heading {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-3);
-    color: var(--color-ink-muted);
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .empty-row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
-    font-size: 0.8rem;
-  }
-
-  .empty-row > :last-child {
-    color: var(--color-ink-muted);
-    font-size: 0.66rem;
-  }
-
-  .dot-leader {
-    height: 1px;
-    flex: 1;
-    border-top: 1px dotted var(--color-rule-custom);
-    opacity: var(--rule-opacity);
-  }
-
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
-  }
-
-  .project-grid > div {
-    display: flex;
-    min-height: 7rem;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: var(--space-4);
-    border: 1px var(--rule-style) var(--color-rule-custom);
-    border-color: color-mix(in srgb, var(--color-rule-custom) calc(var(--rule-opacity) * 100%), transparent);
-    font-family: var(--font-display);
-  }
-
-  .project-grid small {
-    color: var(--color-ink-muted);
-    font-family: var(--font-body);
-    font-size: 0.62rem;
-  }
-
-  .guestbook-note {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-4);
-    font-size: 0.8rem;
-  }
-
-  .guestbook-note p {
-    margin: 0;
-  }
-
-  .muted {
-    color: var(--color-ink-muted);
-  }
-
-  footer {
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-8) var(--page-inset);
-    color: var(--color-ink-muted);
-    font-size: 0.62rem;
-  }
-
-  @media (max-width: 760px) {
-    .site-shell {
-      display: block;
-    }
-
-    .site-rail {
-      position: static;
-      display: block;
-      height: auto;
-      padding: var(--top-space) max(18px, var(--page-inset));
-      border-right: 0;
-      border-bottom: 1px var(--rule-style) var(--color-rule-custom);
-    }
-
-    nav {
-      flex-direction: row;
-      gap: var(--space-4);
-      margin-top: var(--space-6);
-      overflow-x: auto;
-    }
-
-    .rail-note {
-      display: none;
-    }
-
-    main {
-      padding: max(4rem, calc(var(--intro-top) * 0.55)) max(18px, var(--page-inset)) 0;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 13vw, var(--title-size));
-      letter-spacing: min(var(--title-tracking), 1px);
-    }
-
-    .experience::before {
-      left: calc(var(--page-inset) * -1);
-      width: calc(100vw - 2px);
-    }
-
-    .experience-track {
-      grid-template-columns: 1fr;
-    }
-
-    .level-rule {
-      grid-template-columns: auto 1fr auto;
-    }
-
-    .rule {
-      margin-left: calc(var(--page-inset) * -1);
-    }
-
-    .index-section {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-    }
-
-    .index-section::after {
-      left: 0;
-    }
-
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .guestbook-note,
-    footer {
-      flex-wrap: wrap;
-    }
-
-    footer {
-      grid-column: auto;
-      padding-inline: max(18px, var(--page-inset));
-    }
-  }
-
-  @media (pointer: coarse) {
-    :global(html[data-square-cursor='true']),
-    :global(html[data-square-cursor='true'] *) {
-      cursor: auto;
-    }
-  }
+  :global(html[data-square-cursor='true']), :global(html[data-square-cursor='true'] *) { cursor: var(--site-cursor) 8 8, auto; }
+  :global(::selection) { background: var(--color-accent); color: var(--color-ink); }
+  :global(body) { min-width: 320px; overflow-x: hidden; background: var(--color-paper); }
+  :global(body::before) { position:fixed;z-index:10;inset:0;pointer-events:none;content:'';opacity:var(--grain-opacity);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");background-size:var(--grain-size) var(--grain-size); }
+
+  .site-shell { display:grid;grid-template-columns:var(--nav-width) minmax(0,1fr);width:min(100%,var(--canvas-width));min-height:100vh;margin:auto;border-inline:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent); }
+  :global(html[data-edge-rules='false']) .site-shell { border-inline-color:transparent; }
+  .site-rail { position:sticky;top:0;display:flex;height:100vh;flex-direction:column;align-items:flex-start;padding:var(--top-space) var(--page-inset);border-right:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);font-size:.7rem; }
+  :global(html[data-vertical-rules='false']) .site-rail { border-right-color:transparent; }
+  .name-link { color:var(--color-ink-muted);line-height:1.2;text-decoration:none; }
+  nav { display:flex;flex-direction:column;gap:.45rem;margin-top:var(--intro-top); }
+  nav a { position:relative;color:var(--color-ink-muted);text-decoration:none;transition:color 180ms ease,transform 240ms cubic-bezier(.2,.8,.2,1); }
+  nav a span { display:inline-block;color:transparent;transition:color 180ms,transform 240ms; }
+  nav a:hover,nav a.is-active { color:var(--color-accent);transform:translateX(var(--link-shift)); }
+  nav a:hover span,nav a.is-active span { color:currentColor;transform:rotate(90deg) scale(1.4); }
+  .rail-note { margin:auto 0 0;color:var(--color-ink-muted);font-family:var(--font-display);font-size:.7rem;font-style:italic;line-height:1.4; }
+
+  main { min-width:0;padding:calc(var(--top-space) + var(--intro-top)) var(--page-inset) 0; }
+  .whoami { display:grid;grid-template-columns:minmax(0,var(--intro-width)) minmax(160px,1fr);gap:clamp(2rem,6vw,7rem);align-items:start; }
+  .eyebrow,.section-number,.micro-label { margin:0 0 var(--space-6);color:var(--color-ink-muted);font-size:.62rem;letter-spacing:.1em;text-transform:lowercase; }
+  .eyebrow::before { display:inline-block;width:.42rem;height:.42rem;margin-right:var(--space-2);background:var(--color-accent);content:''; }
+  h1 { max-width:18ch;margin:0;font-family:var(--font-display);font-size:clamp(3rem,5vw,var(--title-size));font-weight:400;letter-spacing:var(--title-tracking);line-height:1.05;text-wrap:balance; }
+  h1 em { color:var(--color-accent);font-weight:inherit; }
+  .lede { max-width:54ch;margin:var(--space-8) 0 0;color:var(--color-ink-muted);line-height:var(--body-leading); }
+  .art-placeholder { display:flex;min-height:230px;flex-direction:column;align-items:center;justify-content:center;gap:24px;color:var(--color-ink-muted);font-size:.58rem;letter-spacing:.1em; }
+  .wire-cube { position:relative;width:92px;height:112px;border:1px solid var(--color-accent); }
+  .wire-cube::before { position:absolute;inset:-20px 20px 20px -20px;border:1px solid var(--color-accent);content:''; }
+  .wire-cube i,.wire-cube i::before,.wire-cube i::after { position:absolute;width:28px;border-top:1px solid var(--color-accent);content:'';transform:rotate(-45deg);transform-origin:left; }
+  .wire-cube i { top:0;left:0 }.wire-cube i::before{top:111px;left:91px}.wire-cube i::after{top:111px;left:0}
+  .experience-copy { grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-8);padding-top:var(--space-8);border-top:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);font-family:var(--font-display);font-size:1.05rem; }
+  .experience-copy p { margin:0; }
+  .company-link { position:relative;display:inline-block;color:var(--color-ink);text-decoration-color:var(--color-accent);transition:color 180ms,transform 240ms cubic-bezier(.2,.8,.2,1); }
+  .company-link::before { position:absolute;z-index:-1;right:-3px;bottom:0;left:-3px;height:0;background:var(--color-accent);content:'';transition:height 220ms cubic-bezier(.2,.8,.2,1); }
+  .company-link span { display:inline-block;margin-left:3px;transition:transform 240ms; }
+  .company-link:hover { color:var(--color-ink);transform:translateY(calc(var(--link-shift)*-1)); }
+  .company-link:hover::before { height:58%; }.company-link:hover span { transform:translate(3px,-3px); }
+  blockquote { grid-column:2;max-width:28rem;margin:0;padding-left:var(--space-4);border-left:1px solid var(--color-accent); }
+  blockquote p { margin:0;font-family:var(--font-display);font-style:italic; }
+  blockquote cite { display:block;margin-top:var(--space-3);color:var(--color-ink-muted);font-size:.62rem;font-style:normal; }
+
+  .full-rule { width:100vw;margin:var(--section-gap) 0 0 calc(50% - 50vw - var(--nav-width));border-top:1px var(--rule-style) var(--color-rule-custom);opacity:var(--rule-opacity); }
+  .index-section { position:relative;display:grid;grid-template-columns:minmax(170px,.7fr) 2fr;gap:var(--space-8);margin-inline:calc(var(--page-inset)*-1);padding:var(--space-12) var(--page-inset); }
+  .index-section::after { position:absolute;bottom:0;left:calc((50vw - 50%) * -1 - var(--nav-width));width:100vw;border-bottom:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);content:''; }
+  :global(html[data-horizontal-rules='false']) .full-rule,:global(html[data-horizontal-rules='false']) .index-section::after { border-color:transparent; }
+  .section-heading { display:grid;grid-template-columns:2rem auto;align-items:baseline;align-self:start; }
+  .section-number { margin:0;font-size:.56rem; }:global(html[data-show-numbers='false']) .section-number{visibility:hidden}
+  h2,h3 { margin:0;font-family:var(--font-display);font-weight:400; } h2{font-size:1.5rem}.section-note{margin:0 0 var(--space-8);color:var(--color-ink-muted);font-size:.76rem}
+
+  .writing-elevator { display:grid;grid-template-columns:minmax(260px,.85fr) minmax(320px,1.15fr);gap:clamp(2rem,5vw,5rem); }
+  .writing-list { position:relative;display:grid;gap:14px;padding-left:28px; }
+  .elevator-rail { position:absolute;top:0;bottom:0;left:7px;width:1px;background:var(--color-accent); }
+  .elevator-car { position:absolute;top:0;left:-6px;width:13px;height:13px;background:var(--color-accent);box-shadow:0 0 0 4px var(--color-paper);transition:transform var(--elevator-duration) cubic-bezier(.65,0,.2,1); }
+  .writing-card { min-height:118px;padding:18px 20px;border:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);background:transparent;color:var(--color-ink);font:inherit;text-align:left;transition:border-color 240ms,box-shadow 240ms,transform 240ms,background 240ms; }
+  .writing-card:hover { transform:translateX(var(--link-shift));border-color:var(--color-accent); }
+  .writing-card.is-selected { border:2px solid var(--color-accent);background:color-mix(in srgb,var(--color-accent) 4%,transparent);box-shadow:4px 4px 0 color-mix(in srgb,var(--color-accent) 25%,transparent); }
+  .writing-card span,.writing-card strong,.writing-card small{display:block}.writing-card .writing-index{color:var(--color-ink-muted);font-size:.58rem;letter-spacing:.1em}.writing-card strong{margin-top:20px;font-family:var(--font-display);font-size:1.15rem;font-weight:400}.writing-card small{margin-top:5px;color:var(--color-ink-muted);font-size:.62rem}
+  .writing-stage { position:relative;min-height:382px;border:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);overflow:hidden; }
+  .writing-detail { position:absolute;inset:0;padding:24px;opacity:0;filter:blur(var(--detail-blur));transform:translateY(12px);transition:opacity 420ms,filter 420ms,transform 420ms; }
+  .writing-detail.is-visible { opacity:1;filter:blur(0);transform:translateY(0); }
+  .detail-art { display:grid;height:190px;margin-bottom:24px;place-items:center;border:1px dashed var(--color-accent);color:var(--color-ink-muted);font-family:var(--font-display);font-size:.8rem;font-style:italic; }
+  .writing-detail h3{font-size:1.25rem}.writing-detail>p:last-child{max-width:46ch;color:var(--color-ink-muted);font-size:.75rem}
+
+  .project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}.project-grid>div{display:flex;min-height:9rem;flex-direction:column;justify-content:space-between;padding:var(--space-4);border:1px var(--rule-style) color-mix(in srgb,var(--color-rule-custom) calc(var(--rule-opacity)*100%),transparent);font-family:var(--font-display);transition:border-color 220ms,transform 220ms}.project-grid>div:hover{border-color:var(--color-accent);transform:translateY(calc(var(--link-shift)*-1))}.project-grid small{color:var(--color-ink-muted);font-family:var(--font-body);font-size:.6rem}.project-art{color:var(--color-accent);font-style:italic}.guestbook-note{display:flex;justify-content:space-between;gap:var(--space-4);font-size:.78rem}.guestbook-note p{margin:0}.muted{color:var(--color-ink-muted)}
+  footer{grid-column:2;display:flex;justify-content:space-between;gap:var(--space-4);padding:var(--space-8) var(--page-inset);color:var(--color-ink-muted);font-size:.6rem}
+
+  @media(max-width:900px){.whoami{grid-template-columns:1fr}.art-placeholder{display:none}.experience-copy{grid-template-columns:1fr}.experience-copy p{padding-bottom:var(--space-4);border-bottom:1px dashed var(--color-rule-custom)}blockquote{grid-column:1}.writing-elevator{grid-template-columns:1fr}.writing-stage{min-height:400px}}
+  @media(max-width:760px){.site-shell{display:block}.site-rail{position:static;display:block;height:auto;padding:var(--top-space) max(18px,var(--page-inset));border-right:0;border-bottom:1px var(--rule-style) var(--color-rule-custom)}nav{flex-direction:row;gap:var(--space-4);margin-top:var(--space-6);overflow-x:auto}.rail-note{display:none}main{padding:max(4rem,calc(var(--intro-top)*.55)) max(18px,var(--page-inset)) 0}h1{font-size:clamp(2.8rem,13vw,var(--title-size));letter-spacing:min(var(--title-tracking),1px)}.full-rule{margin-left:calc(50% - 50vw)}.index-section{grid-template-columns:1fr;gap:var(--space-6)}.index-section::after{left:calc((50vw - 50%)*-1)}.writing-elevator{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.guestbook-note,footer{flex-wrap:wrap}footer{grid-column:auto;padding-inline:max(18px,var(--page-inset))}}
+  @media(pointer:coarse){:global(html[data-square-cursor='true']),:global(html[data-square-cursor='true'] *){cursor:auto}}
+  @media(prefers-reduced-motion:reduce){.elevator-car,.writing-card,.writing-detail,.company-link,.company-link::before,nav a{transition-duration:.01ms!important}}
 </style>
