@@ -14,7 +14,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-square-cursor="true" data-edge-rules="true" data-horizontal-rules="true">
+<html lang="en" data-custom-cursor="true" data-edge-rules="true" data-horizontal-rules="true">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -23,6 +23,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <div class="site-cursor" data-cursor aria-hidden="true"><span></span></div>
     <div class="page-frame">
       <div class="page-view" data-page-view>
         <slot />
@@ -58,11 +59,21 @@ const { title } = Astro.props;
     Details: {
       grain: [0.2, 0, 0.3, 0.005], grainSize: [220, 48, 300, 4],
       ruleStyle: { type: 'select', options: ['dashed', 'dotted', 'solid'] }, ruleOpacity: [0.45, 0.1, 1, 0.01],
-      horizontalRules: true, edgeRules: true, squareCursor: true, cursorSize: [17, 6, 22, 1],
+      horizontalRules: true, edgeRules: true,
+    },
+    Cursor: {
+      enabled: true,
+      size: [17, 10, 28, 1],
+      barWidth: [3, 1, 7, 0.5],
+      crossThickness: [1.5, 0.5, 4, 0.5],
+      morphDuration: [180, 60, 500, 10],
+      follow: [0.55, 0.15, 1, 0.05],
     },
     Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1], pageBlur: [12, 4, 24, 1], pageDuration: [680, 300, 1200, 20] },
     Copy: { title: 'William Kiem Lafond', introduction: 'this is a notebook for things i learn by building.' },
   }, { id: 'personal-site-v5', persist: true });
+
+  let cursorFollow = 0.55;
 
   kit.subscribe((values) => {
     const style = document.documentElement.style;
@@ -79,14 +90,50 @@ const { title } = Astro.props;
     style.setProperty('--link-shift', `${values.Motion.linkShift}px`); style.setProperty('--elevator-duration', `${values.Motion.elevatorDuration}ms`);
     style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`); style.setProperty('--page-blur', `${values.Motion.pageBlur}px`);
     style.setProperty('--page-duration', `${values.Motion.pageDuration}ms`);
-    const cursorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${values.Details.cursorSize}" height="${values.Details.cursorSize}"><rect width="100%" height="100%" fill="${values.Color.accent}"/></svg>`;
-    style.setProperty('--site-cursor', `url("data:image/svg+xml,${encodeURIComponent(cursorSvg)}")`);
+    style.setProperty('--cursor-size', `${values.Cursor.size}px`); style.setProperty('--cursor-bar-width', `${values.Cursor.barWidth}px`);
+    style.setProperty('--cursor-cross-thickness', `${values.Cursor.crossThickness}px`); style.setProperty('--cursor-morph-duration', `${values.Cursor.morphDuration}ms`);
+    cursorFollow = values.Cursor.follow;
     document.documentElement.dataset.horizontalRules = String(values.Details.horizontalRules);
     document.documentElement.dataset.edgeRules = String(values.Details.edgeRules);
-    document.documentElement.dataset.squareCursor = String(values.Details.squareCursor);
+    document.documentElement.dataset.customCursor = String(values.Cursor.enabled);
     document.querySelectorAll<HTMLElement>('[data-site-title]').forEach((node) => { node.textContent = values.Copy.title.toLowerCase(); });
     document.querySelectorAll<HTMLElement>('[data-site-intro]').forEach((node) => { node.textContent = values.Copy.introduction.toLowerCase(); });
   });
+
+  const cursor = document.querySelector<HTMLElement>('[data-cursor]');
+  let targetX = -100;
+  let targetY = -100;
+  let currentX = -100;
+  let currentY = -100;
+  let cursorFrame = 0;
+
+  const renderCursor = () => {
+    currentX += (targetX - currentX) * cursorFollow;
+    currentY += (targetY - currentY) * cursorFollow;
+    if (cursor) cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    if (Math.abs(targetX - currentX) > 0.02 || Math.abs(targetY - currentY) > 0.02) cursorFrame = requestAnimationFrame(renderCursor);
+    else cursorFrame = 0;
+  };
+  const queueCursor = () => { if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor); };
+  const textSelector = 'p,h1,h2,h3,span,strong,small,cite,blockquote,label,li,code,pre';
+  const clickableSelector = 'a,button,[role="button"],[role="tab"],input,textarea,select,summary';
+
+  document.addEventListener('pointermove', (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+    if (currentX < -50) { currentX = targetX; currentY = targetY; }
+    cursor?.classList.add('is-visible');
+    queueCursor();
+  }, { passive: true });
+  document.addEventListener('pointerover', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const state = target?.closest(clickableSelector) ? 'clickable' : target?.closest(textSelector) ? 'text' : 'default';
+    if (cursor) cursor.dataset.state = state;
+  }, { passive: true });
+  document.addEventListener('pointerdown', () => cursor?.classList.add('is-pressed'), { passive: true });
+  document.addEventListener('pointerup', () => cursor?.classList.remove('is-pressed'), { passive: true });
+  document.documentElement.addEventListener('mouseleave', () => cursor?.classList.remove('is-visible'));
+  window.addEventListener('blur', () => cursor?.classList.remove('is-visible'));
 
   document.querySelectorAll<HTMLAnchorElement>('a.page-transition-link').forEach((link) => {
     link.addEventListener('click', (event) => {
