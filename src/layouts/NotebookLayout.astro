@@ -24,11 +24,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="site-cursor" data-cursor aria-hidden="true"><span></span></div>
-    <div class="page-frame">
-      <div class="page-view" data-page-view>
-        <slot />
-      </div>
-    </div>
+    <slot />
   </body>
 </html>
 
@@ -70,7 +66,7 @@ const { title } = Astro.props;
       morphDuration: [220, 60, 500, 10],
       follow: [0.55, 0.15, 1, 0.05],
     },
-    Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1], pageBlur: [12, 4, 24, 1], pageDuration: [680, 300, 1200, 20] },
+    Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1], cameraDuration: [1050, 400, 2000, 50] },
     Copy: { title: 'William Kiem Lafond', introduction: 'this is a notebook for things i learn by building.' },
   }, { id: 'personal-site-v5', persist: true });
 
@@ -89,8 +85,7 @@ const { title } = Astro.props;
     style.setProperty('--grain-opacity', String(values.Details.grain)); style.setProperty('--grain-size', `${values.Details.grainSize}px`);
     style.setProperty('--rule-style', values.Details.ruleStyle); style.setProperty('--rule-opacity', String(values.Details.ruleOpacity));
     style.setProperty('--link-shift', `${values.Motion.linkShift}px`); style.setProperty('--elevator-duration', `${values.Motion.elevatorDuration}ms`);
-    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`); style.setProperty('--page-blur', `${values.Motion.pageBlur}px`);
-    style.setProperty('--page-duration', `${values.Motion.pageDuration}ms`);
+    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`); style.setProperty('--camera-duration', `${values.Motion.cameraDuration}ms`);
     style.setProperty('--cursor-size', `${values.Cursor.size}px`); style.setProperty('--cursor-bar-width', `${values.Cursor.barWidth}px`);
     style.setProperty('--cursor-bar-height', `${values.Cursor.barHeight}px`); style.setProperty('--cursor-cross-size', `${values.Cursor.crossSize}px`);
     style.setProperty('--cursor-morph-duration', `${values.Cursor.morphDuration}ms`);
@@ -137,15 +132,4 @@ const { title } = Astro.props;
   document.documentElement.addEventListener('mouseleave', () => cursor?.classList.remove('is-visible'));
   window.addEventListener('blur', () => cursor?.classList.remove('is-visible'));
 
-  document.querySelectorAll<HTMLAnchorElement>('a.page-transition-link').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const destination = new URL(link.href);
-      if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
-      event.preventDefault();
-      document.querySelector('.page-frame')?.classList.add('is-leaving');
-      const duration = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--page-duration')) || 680;
-      window.setTimeout(() => location.assign(destination.href), duration * 0.82);
-    });
-  });
 </script>

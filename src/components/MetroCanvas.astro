@@ -1,0 +1,143 @@
+---
+import WritingElevator from './WritingElevator.astro';
+
+interface Props {
+  initialView: 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
+}
+const { initialView } = Astro.props;
+const views = [
+  { id: 'whoami', number: '00', label: 'whoami', href: '/whoami/' },
+  { id: 'writings', number: '01', label: 'writings', href: '/writings/' },
+  { id: 'projects', number: '02', label: 'projects', href: '/projects/' },
+  { id: 'guestbook', number: '03', label: 'guestbook', href: '/guestbook/' },
+] as const;
+---
+
+<div class="metro-viewport" data-metro initial-view={initialView}>
+  <div class="metro-world" data-metro-world>
+    <div class="metro-axis metro-axis-horizontal" aria-hidden="true"></div>
+    <div class="metro-axis metro-axis-vertical" aria-hidden="true"></div>
+
+    <section class="metro-panel metro-home" data-view="home" data-x="0" data-y="0">
+      <div class="panel-canvas">
+        <main class="page-content home-page">
+          <div class="home-copy">
+            <p class="kicker">home</p>
+            <h1><span data-site-title>william kiem lafond</span> is a <em>systems engineer</em>.</h1>
+            <p class="lede" data-site-intro>this is a notebook for things i learn by building.</p>
+          </div>
+          <div class="home-art" aria-label="placeholder for hand-drawn artwork"><span>your ink drawing</span><div class="wire-cube" aria-hidden="true"></div></div>
+          <nav class="home-links" aria-label="site views">
+            {views.map((view) => (
+              <a class="view-link metro-link" href={view.href} data-target-view={view.id}>
+                <span>{view.number}</span><strong>{view.label}</strong><i aria-hidden="true">→</i>
+              </a>
+            ))}
+          </nav>
+        </main>
+      </div>
+    </section>
+
+    <section class="metro-panel metro-whoami" data-view="whoami" data-x="0" data-y="-1">
+      <div class="panel-canvas">
+        <main class="page-content">
+          <a class="view-home metro-link" href="/" data-target-view="home">↓ home</a>
+          <header class="view-heading"><p class="section-number">00</p><h1>whoami</h1></header>
+          <div class="full-width-rule" aria-hidden="true"></div>
+          <section class="view-body who-copy" aria-label="professional experience">
+            <p>
+              worked on machine learning algorithms at <a class="company-link" href="https://www.shopify.com/" target="_blank" rel="noreferrer">shopify</a>.
+              fine-tuned cpu compilers at <a class="company-link" href="https://www.qualcomm.com/" target="_blank" rel="noreferrer">qualcomm</a>.
+              researched applied rag at <a class="company-link" href="https://mila.quebec/en" target="_blank" rel="noreferrer">mila</a>.
+            </p>
+            <blockquote class="who-quote">“we think systems, but we also have an eye for aesthetics.”<cite>— vlad, good friend &amp; college roommate</cite></blockquote>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="metro-panel metro-writings" data-view="writings" data-x="-1" data-y="0">
+      <div class="panel-canvas">
+        <main class="page-content">
+          <a class="view-home metro-link" href="/" data-target-view="home">→ home</a>
+          <header class="view-heading"><p class="section-number">01</p><h1>writings</h1></header>
+          <div class="full-width-rule" aria-hidden="true"></div>
+          <section class="view-body" aria-label="writing index"><WritingElevator /></section>
+        </main>
+      </div>
+    </section>
+
+    <section class="metro-panel metro-projects" data-view="projects" data-x="1" data-y="0">
+      <div class="panel-canvas">
+        <main class="page-content">
+          <a class="view-home metro-link" href="/" data-target-view="home">← home</a>
+          <header class="view-heading"><p class="section-number">02</p><h1>projects</h1></header>
+          <div class="full-width-rule" aria-hidden="true"></div>
+          <section class="view-body project-grid" aria-label="projects pending">
+            <article class="project-card"><h2>selected work</h2><small>details pending</small></article>
+            <article class="project-card art-card"><h2>your drawing here</h2><small>ink / pixel / diagram</small></article>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="metro-panel metro-guestbook" data-view="guestbook" data-x="0" data-y="1">
+      <div class="panel-canvas">
+        <main class="page-content">
+          <a class="view-home metro-link" href="/" data-target-view="home">↑ home</a>
+          <header class="view-heading"><p class="section-number">03</p><h1>guestbook</h1></header>
+          <div class="full-width-rule" aria-hidden="true"></div>
+          <section class="view-body guestbook-copy">
+            <p>a small place for visitors to leave a note. the actual guestbook will be wired once its storage and moderation are decided.</p>
+            <span class="guestbook-status">not open yet</span>
+          </section>
+        </main>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  type ViewName = 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
+  const coordinates: Record<ViewName, { x: number; y: number; path: string; title: string }> = {
+    home: { x: 0, y: 0, path: '/', title: 'william kiem lafond' },
+    whoami: { x: 0, y: -1, path: '/whoami/', title: 'whoami — william kiem lafond' },
+    writings: { x: -1, y: 0, path: '/writings/', title: 'writings — william kiem lafond' },
+    projects: { x: 1, y: 0, path: '/projects/', title: 'projects — william kiem lafond' },
+    guestbook: { x: 0, y: 1, path: '/guestbook/', title: 'guestbook — william kiem lafond' },
+  };
+  const metro = document.querySelector<HTMLElement>('[data-metro]');
+  const world = document.querySelector<HTMLElement>('[data-metro-world]');
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-view]'));
+
+  const viewFromPath = (): ViewName => {
+    const part = location.pathname.split('/').filter(Boolean)[0];
+    return part && part in coordinates ? part as ViewName : 'home';
+  };
+  const moveCamera = (view: ViewName, updateHistory = true) => {
+    if (!world || !metro) return;
+    const destination = coordinates[view];
+    world.style.setProperty('--camera-translate-x', `${destination.x * -100}vw`);
+    world.style.setProperty('--camera-translate-y', `${destination.y * -100}vh`);
+    metro.dataset.activeView = view;
+    panels.forEach((panel) => {
+      const active = panel.dataset.view === view;
+      panel.toggleAttribute('inert', !active);
+      panel.setAttribute('aria-hidden', String(!active));
+    });
+    document.title = destination.title;
+    if (updateHistory && location.pathname !== destination.path) history.pushState({ view }, '', destination.path);
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>('.metro-link[data-target-view]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      moveCamera(link.dataset.targetView as ViewName);
+    });
+  });
+  window.addEventListener('popstate', () => moveCamera(viewFromPath(), false));
+  if (world) world.classList.add('is-positioning');
+  moveCamera(viewFromPath(), false);
+  requestAnimationFrame(() => requestAnimationFrame(() => world?.classList.remove('is-positioning')));
+</script>

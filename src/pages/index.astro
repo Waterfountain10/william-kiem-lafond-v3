@@ -1,30 +1,5 @@
 ---
 import NotebookLayout from '../layouts/NotebookLayout.astro';
-const views = [
-  { number: '00', label: 'whoami', href: '/whoami/' },
-  { number: '01', label: 'writings', href: '/writings/' },
-  { number: '02', label: 'projects', href: '/projects/' },
-  { number: '03', label: 'guestbook', href: '/guestbook/' },
-];
+import MetroCanvas from '../components/MetroCanvas.astro';
 ---
-
-<NotebookLayout title="william kiem lafond">
-  <main class="page-content home-page">
-    <div class="home-copy">
-      <p class="kicker">home</p>
-      <h1><span data-site-title>william kiem lafond</span> is a <em>systems engineer</em>.</h1>
-      <p class="lede" data-site-intro>this is a notebook for things i learn by building.</p>
-    </div>
-    <div class="home-art" aria-label="placeholder for hand-drawn artwork">
-      <span>your ink drawing</span>
-      <div class="wire-cube" aria-hidden="true"></div>
-    </div>
-    <nav class="home-links" aria-label="site views">
-      {views.map((view) => (
-        <a class="view-link page-transition-link" href={view.href}>
-          <span>{view.number}</span><strong>{view.label}</strong><i aria-hidden="true">→</i>
-        </a>
-      ))}
-    </nav>
-  </main>
-</NotebookLayout>
+<NotebookLayout title="william kiem lafond"><MetroCanvas initialView="home" /></NotebookLayout>

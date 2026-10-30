@@ -1,22 +1,5 @@
 ---
 import NotebookLayout from '../layouts/NotebookLayout.astro';
+import MetroCanvas from '../components/MetroCanvas.astro';
 ---
-
-<NotebookLayout title="whoami — william kiem lafond">
-  <main class="page-content">
-    <a class="view-home page-transition-link" href="/">← home</a>
-    <header class="view-heading"><p class="section-number">00</p><h1>whoami</h1></header>
-    <div class="full-width-rule" aria-hidden="true"></div>
-    <section class="view-body who-copy" aria-label="professional experience">
-      <p>
-        worked on machine learning algorithms at <a class="company-link" href="https://www.shopify.com/" target="_blank" rel="noreferrer">shopify</a>.
-        fine-tuned cpu compilers at <a class="company-link" href="https://www.qualcomm.com/" target="_blank" rel="noreferrer">qualcomm</a>.
-        researched applied rag at <a class="company-link" href="https://mila.quebec/en" target="_blank" rel="noreferrer">mila</a>.
-      </p>
-      <blockquote class="who-quote">
-        “we think systems, but we also have an eye for aesthetics.”
-        <cite>— vlad, good friend &amp; college roommate</cite>
-      </blockquote>
-    </section>
-  </main>
-</NotebookLayout>
+<NotebookLayout title="whoami — william kiem lafond"><MetroCanvas initialView="whoami" /></NotebookLayout>
