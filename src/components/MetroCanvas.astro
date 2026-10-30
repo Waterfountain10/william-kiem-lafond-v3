@@ -1,6 +1,5 @@
 ---
 import WritingElevator from './WritingElevator.astro';
-import RouteNav from './RouteNav.astro';
 
 interface Props {
   initialView: 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
@@ -16,9 +15,6 @@ const views = [
 
 <div class="metro-viewport" data-metro initial-view={initialView}>
   <div class="metro-world" data-metro-world>
-    <div class="metro-axis metro-axis-horizontal" aria-hidden="true"></div>
-    <div class="metro-axis metro-axis-vertical" aria-hidden="true"></div>
-
     <section class="metro-panel metro-home" data-view="home" data-x="0" data-y="0">
       <div class="panel-canvas">
         <main class="page-content home-page">
@@ -52,7 +48,6 @@ const views = [
             </p>
             <blockquote class="who-quote">“we think systems, but we also have an eye for aesthetics.”<cite>— vlad, good friend &amp; college roommate</cite></blockquote>
           </section>
-          <RouteNav current="whoami" />
         </main>
       </div>
     </section>
@@ -63,7 +58,6 @@ const views = [
           <header class="view-heading"><span class="station-car" aria-hidden="true"></span><p class="section-number">01</p><h1>writings</h1></header>
           <div class="full-width-rule" aria-hidden="true"></div>
           <section class="view-body" aria-label="writing index"><WritingElevator /></section>
-          <RouteNav current="writings" />
         </main>
       </div>
     </section>
@@ -77,7 +71,6 @@ const views = [
             <article class="project-card"><h2>selected work</h2><small>details pending</small></article>
             <article class="project-card art-card"><h2>your drawing here</h2><small>ink / pixel / diagram</small></article>
           </section>
-          <RouteNav current="projects" />
         </main>
       </div>
     </section>
@@ -91,7 +84,6 @@ const views = [
             <p>a small place for visitors to leave a note. the actual guestbook will be wired once its storage and moderation are decided.</p>
             <span class="guestbook-status">not open yet</span>
           </section>
-          <RouteNav current="guestbook" />
         </main>
       </div>
     </section>
