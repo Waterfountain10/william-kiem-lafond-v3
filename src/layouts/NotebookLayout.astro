@@ -66,7 +66,21 @@ const { title } = Astro.props;
       morphDuration: [220, 60, 500, 10],
       follow: [0.55, 0.15, 1, 0.05],
     },
-    Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1], cameraDuration: [1050, 400, 2000, 50] },
+    Spatial: {
+      cameraDuration: [1050, 400, 2200, 50],
+      cameraEase: { type: 'select', options: ['exponential', 'smooth', 'snappy'] },
+      junctionPause: [90, 0, 500, 10],
+      routeGap: [22, 10, 48, 2],
+      trackThickness: [1, 0.5, 4, 0.5],
+      trackOpacity: [0.45, 0.1, 1, 0.05],
+      stationSize: [12, 6, 24, 1],
+      centerContent: true,
+      showAxes: true,
+      showRouteMap: true,
+      routeThroughHome: true,
+      lockHorizontalGestures: true,
+    },
+    Motion: { linkShift: [4, 0, 12, 1], elevatorDuration: [560, 120, 1200, 20], detailBlur: [6, 0, 18, 1] },
     Copy: { title: 'William Kiem Lafond', introduction: 'this is a notebook for things i learn by building.' },
   }, { id: 'personal-site-v5', persist: true });
 
@@ -85,7 +99,16 @@ const { title } = Astro.props;
     style.setProperty('--grain-opacity', String(values.Details.grain)); style.setProperty('--grain-size', `${values.Details.grainSize}px`);
     style.setProperty('--rule-style', values.Details.ruleStyle); style.setProperty('--rule-opacity', String(values.Details.ruleOpacity));
     style.setProperty('--link-shift', `${values.Motion.linkShift}px`); style.setProperty('--elevator-duration', `${values.Motion.elevatorDuration}ms`);
-    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`); style.setProperty('--camera-duration', `${values.Motion.cameraDuration}ms`);
+    const cameraEases: Record<string, string> = {
+      exponential: 'cubic-bezier(.87, 0, .13, 1)',
+      smooth: 'cubic-bezier(.65, 0, .35, 1)',
+      snappy: 'cubic-bezier(.8, 0, .2, 1)',
+    };
+    style.setProperty('--detail-blur', `${values.Motion.detailBlur}px`);
+    style.setProperty('--camera-duration', `${values.Spatial.cameraDuration}ms`); style.setProperty('--camera-ease', cameraEases[values.Spatial.cameraEase] ?? cameraEases.exponential);
+    style.setProperty('--junction-pause', `${values.Spatial.junctionPause}ms`); style.setProperty('--route-gap', `${values.Spatial.routeGap}px`);
+    style.setProperty('--track-thickness', `${values.Spatial.trackThickness}px`); style.setProperty('--track-opacity', String(values.Spatial.trackOpacity));
+    style.setProperty('--station-size', `${values.Spatial.stationSize}px`);
     style.setProperty('--cursor-size', `${values.Cursor.size}px`); style.setProperty('--cursor-bar-width', `${values.Cursor.barWidth}px`);
     style.setProperty('--cursor-bar-height', `${values.Cursor.barHeight}px`); style.setProperty('--cursor-cross-size', `${values.Cursor.crossSize}px`);
     style.setProperty('--cursor-morph-duration', `${values.Cursor.morphDuration}ms`);
@@ -93,6 +116,11 @@ const { title } = Astro.props;
     document.documentElement.dataset.horizontalRules = String(values.Details.horizontalRules);
     document.documentElement.dataset.edgeRules = String(values.Details.edgeRules);
     document.documentElement.dataset.customCursor = String(values.Cursor.enabled);
+    document.documentElement.dataset.centerContent = String(values.Spatial.centerContent);
+    document.documentElement.dataset.showAxes = String(values.Spatial.showAxes);
+    document.documentElement.dataset.showRouteMap = String(values.Spatial.showRouteMap);
+    document.documentElement.dataset.routeThroughHome = String(values.Spatial.routeThroughHome);
+    document.documentElement.dataset.lockHorizontalGestures = String(values.Spatial.lockHorizontalGestures);
     document.querySelectorAll<HTMLElement>('[data-site-title]').forEach((node) => { node.textContent = values.Copy.title.toLowerCase(); });
     document.querySelectorAll<HTMLElement>('[data-site-intro]').forEach((node) => { node.textContent = values.Copy.introduction.toLowerCase(); });
   });

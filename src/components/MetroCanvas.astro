@@ -1,5 +1,6 @@
 ---
 import WritingElevator from './WritingElevator.astro';
+import RouteNav from './RouteNav.astro';
 
 interface Props {
   initialView: 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
@@ -41,8 +42,7 @@ const views = [
     <section class="metro-panel metro-whoami" data-view="whoami" data-x="0" data-y="-1">
       <div class="panel-canvas">
         <main class="page-content">
-          <a class="view-home metro-link" href="/" data-target-view="home">↓ home</a>
-          <header class="view-heading"><p class="section-number">00</p><h1>whoami</h1></header>
+          <header class="view-heading"><span class="station-car" aria-hidden="true"></span><p class="section-number">00</p><h1>whoami</h1></header>
           <div class="full-width-rule" aria-hidden="true"></div>
           <section class="view-body who-copy" aria-label="professional experience">
             <p>
@@ -52,6 +52,7 @@ const views = [
             </p>
             <blockquote class="who-quote">“we think systems, but we also have an eye for aesthetics.”<cite>— vlad, good friend &amp; college roommate</cite></blockquote>
           </section>
+          <RouteNav current="whoami" />
         </main>
       </div>
     </section>
@@ -59,10 +60,10 @@ const views = [
     <section class="metro-panel metro-writings" data-view="writings" data-x="-1" data-y="0">
       <div class="panel-canvas">
         <main class="page-content">
-          <a class="view-home metro-link" href="/" data-target-view="home">→ home</a>
-          <header class="view-heading"><p class="section-number">01</p><h1>writings</h1></header>
+          <header class="view-heading"><span class="station-car" aria-hidden="true"></span><p class="section-number">01</p><h1>writings</h1></header>
           <div class="full-width-rule" aria-hidden="true"></div>
           <section class="view-body" aria-label="writing index"><WritingElevator /></section>
+          <RouteNav current="writings" />
         </main>
       </div>
     </section>
@@ -70,13 +71,13 @@ const views = [
     <section class="metro-panel metro-projects" data-view="projects" data-x="1" data-y="0">
       <div class="panel-canvas">
         <main class="page-content">
-          <a class="view-home metro-link" href="/" data-target-view="home">← home</a>
-          <header class="view-heading"><p class="section-number">02</p><h1>projects</h1></header>
+          <header class="view-heading"><span class="station-car" aria-hidden="true"></span><p class="section-number">02</p><h1>projects</h1></header>
           <div class="full-width-rule" aria-hidden="true"></div>
           <section class="view-body project-grid" aria-label="projects pending">
             <article class="project-card"><h2>selected work</h2><small>details pending</small></article>
             <article class="project-card art-card"><h2>your drawing here</h2><small>ink / pixel / diagram</small></article>
           </section>
+          <RouteNav current="projects" />
         </main>
       </div>
     </section>
@@ -84,13 +85,13 @@ const views = [
     <section class="metro-panel metro-guestbook" data-view="guestbook" data-x="0" data-y="1">
       <div class="panel-canvas">
         <main class="page-content">
-          <a class="view-home metro-link" href="/" data-target-view="home">↑ home</a>
-          <header class="view-heading"><p class="section-number">03</p><h1>guestbook</h1></header>
+          <header class="view-heading"><span class="station-car" aria-hidden="true"></span><p class="section-number">03</p><h1>guestbook</h1></header>
           <div class="full-width-rule" aria-hidden="true"></div>
           <section class="view-body guestbook-copy">
             <p>a small place for visitors to leave a note. the actual guestbook will be wired once its storage and moderation are decided.</p>
             <span class="guestbook-status">not open yet</span>
           </section>
+          <RouteNav current="guestbook" />
         </main>
       </div>
     </section>
@@ -114,7 +115,13 @@ const views = [
     const part = location.pathname.split('/').filter(Boolean)[0];
     return part && part in coordinates ? part as ViewName : 'home';
   };
-  const moveCamera = (view: ViewName, updateHistory = true) => {
+  let currentView = viewFromPath();
+  let journeyTimer = 0;
+  let travelling = false;
+
+  const cameraDuration = () => Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--camera-duration')) || 1050;
+  const junctionPause = () => Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--junction-pause')) || 0;
+  const setCamera = (view: ViewName) => {
     if (!world || !metro) return;
     const destination = coordinates[view];
     world.style.setProperty('--camera-translate-x', `${destination.x * -100}vw`);
@@ -126,7 +133,25 @@ const views = [
       panel.setAttribute('aria-hidden', String(!active));
     });
     document.title = destination.title;
+    currentView = view;
+  };
+  const moveCamera = (view: ViewName, updateHistory = true) => {
+    if (!world || !metro || view === currentView || travelling) return;
+    const destination = coordinates[view];
     if (updateHistory && location.pathname !== destination.path) history.pushState({ view }, '', destination.path);
+    const routeThroughHome = document.documentElement.dataset.routeThroughHome !== 'false';
+    const needsJunction = routeThroughHome && currentView !== 'home' && view !== 'home';
+    travelling = true;
+    if (needsJunction) {
+      setCamera('home');
+      journeyTimer = window.setTimeout(() => {
+        setCamera(view);
+        journeyTimer = window.setTimeout(() => { travelling = false; }, cameraDuration());
+      }, cameraDuration() + junctionPause());
+    } else {
+      setCamera(view);
+      journeyTimer = window.setTimeout(() => { travelling = false; }, cameraDuration());
+    }
   };
 
   document.querySelectorAll<HTMLAnchorElement>('.metro-link[data-target-view]').forEach((link) => {
@@ -136,8 +161,16 @@ const views = [
       moveCamera(link.dataset.targetView as ViewName);
     });
   });
-  window.addEventListener('popstate', () => moveCamera(viewFromPath(), false));
+  document.addEventListener('wheel', (event) => {
+    const locked = document.documentElement.dataset.lockHorizontalGestures !== 'false';
+    if (locked && Math.abs(event.deltaX) > Math.abs(event.deltaY)) event.preventDefault();
+  }, { passive: false });
+  window.addEventListener('popstate', () => {
+    window.clearTimeout(journeyTimer);
+    travelling = false;
+    moveCamera(viewFromPath(), false);
+  });
   if (world) world.classList.add('is-positioning');
-  moveCamera(viewFromPath(), false);
+  setCamera(currentView);
   requestAnimationFrame(() => requestAnimationFrame(() => world?.classList.remove('is-positioning')));
 </script>

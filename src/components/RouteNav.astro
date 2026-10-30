@@ -1,0 +1,27 @@
+---
+interface Props {
+  current: 'home' | 'whoami' | 'writings' | 'projects' | 'guestbook';
+}
+const { current } = Astro.props;
+const routes = [
+  { id: 'home', number: '·', label: 'home', href: '/' },
+  { id: 'whoami', number: '00', label: 'whoami', href: '/whoami/' },
+  { id: 'writings', number: '01', label: 'writings', href: '/writings/' },
+  { id: 'projects', number: '02', label: 'projects', href: '/projects/' },
+  { id: 'guestbook', number: '03', label: 'guestbook', href: '/guestbook/' },
+] as const;
+---
+<nav class="route-nav" aria-label="spatial navigation">
+  <span class="route-track" aria-hidden="true"></span>
+  {routes.map((route) => (
+    <a
+      class="route-node metro-link"
+      class:list={{ 'is-current': current === route.id }}
+      href={route.href}
+      data-target-view={route.id}
+      aria-current={current === route.id ? 'page' : undefined}
+    >
+      <i aria-hidden="true"></i><small>{route.number}</small><span>{route.label}</span>
+    </a>
+  ))}
+</nav>
